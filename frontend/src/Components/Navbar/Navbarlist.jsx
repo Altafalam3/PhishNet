@@ -31,12 +31,11 @@ const Navbarlist = () => {
       cName: "Navlinks",
       // icon: faVideo,
     },
-    // {
-    //   title: "Resources",
-    //   url: "/resource",
-    //   cName: "Navlinks",
-    //   icon: faQuestionCircle,
-    // },
+    {
+      title: "Dashboard",
+      url: "/dashboard",
+      cName: "Navlinks",
+    },
     // {
     //   title : "Advocates",
     //   url:"/lawyers",

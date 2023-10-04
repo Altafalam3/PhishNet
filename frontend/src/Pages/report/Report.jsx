@@ -1,63 +1,93 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import './Report.css'
 
-const Report = ({ domain }) => {
-  const [reportData, setReportData] = useState(null);
+const Report = () => {
+  const [link, setLink] = useState('');
+  const [description, setDescription] = useState('');
+  const [isConfirmationOpen, setConfirmationOpen] = useState(false);
+  const gradientColors = [
+    '#67E0DD',
+    '#A6D8DF',
+    '#C5E8E2',
+    '#94BBDF',
+    '#DBDAE0',
+    '#FAE8E1',
+  ];
+   const gradientStyle = {
+    background: `linear-gradient(to right, ${gradientColors.join(',')})`,
+    minHeight: '80vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
 
-  useEffect(() => {
-    // Fetch report data based on the domain when the component mounts
-    const fetchData = async () => {
-      try {
-        // Make an API call or fetch data based on the provided domain
-        const response = await fetch(`/api/report?domain=${domain}`);
-        const data = await response.json();
+  const handleSubmit = () => {
+    setConfirmationOpen(true);
+  };
 
-        // Update the state with the fetched report data
-        setReportData(data);
-      } catch (error) {
-        console.error('Error fetching report data:', error);
-      }
-    };
+  const handleConfirm = () => {
+    // Implement the logic to submit the report (e.g., API call)
+    console.log('Link:', link);
+    console.log('Description:', description);
 
-    fetchData();
-  }, [domain]);
+    // After submitting, you can redirect the user or show a success message
+    setConfirmationOpen(false);
+  };
+
+  const handleCancel = () => {
+    setConfirmationOpen(false);
+  };
 
   return (
-    <div>
-      <h2>Security Report for {domain}</h2>
+    <div style={gradientStyle}>
+    <div className="report-container">
+      <h2>Report a Phishing Link</h2>
 
-      {reportData ? (
-        <div>
-          <h3>Summary:</h3>
-          <p>Status: {reportData.status}</p>
-          <p>SSL Certificate: {reportData.sslStatus}</p>
-          <p>HTTPS Status: {reportData.httpsStatus}</p>
+      {/* Link Input */}
+      <div className="input-container">
+        <label htmlFor="linkInput">Phishing Link:</label>
+        <input
+          type="text"
+          id="linkInput"
+          value={link}
+          onChange={(e) => setLink(e.target.value)}
+          placeholder="Enter the suspected phishing link"
+        />
+      </div>
 
-          <h3>Detailed Analysis:</h3>
-          <ul>
-            <li>
-              <strong>Domain Age:</strong> {reportData.domainAge} days
-            </li>
-            <li>
-              <strong>Registration Details:</strong> {reportData.registrationDetails}
-            </li>
-            <li>
-              <strong>Web Page Content:</strong> {reportData.pageContentAnalysis}
-            </li>
-            {/* Add more detailed analysis as needed */}
-          </ul>
+      {/* Description Input */}
+      <div className="input-container">
+        <label htmlFor="descriptionInput">Description:</label>
+        <textarea
+          id="descriptionInput"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Provide additional details or context"
+        />
+      </div>
 
-          <h3>Recommendations:</h3>
-          <p>
-            Based on the analysis, it is recommended to {reportData.recommendation}.
-          </p>
+      {/* Submit Button */}
+      <button className="submit-button" onClick={handleSubmit}>
+        Submit
+      </button>
 
-          {/* Add more sections as needed */}
+      {/* Confirmation Dialog */}
+      {isConfirmationOpen && (
+        <div className="confirmation-dialog">
+          <p>Are you sure you want to submit this report?</p>
+          <button className="confirm-button" onClick={handleConfirm}>
+            Yes
+          </button>
+          <button className="cancel-button" onClick={handleCancel}>
+            No
+          </button>
         </div>
-      ) : (
-        <p>Loading report...</p>
       )}
-    </div>
+      </div>
+      </div>
   );
 };
 
 export default Report;
+
+

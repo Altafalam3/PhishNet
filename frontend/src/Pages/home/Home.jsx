@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import male from './male.png';
 
 const App = () => {
@@ -10,6 +10,9 @@ const App = () => {
     '#DBDAE0',
     '#FAE8E1',
   ];
+
+  const [scanning, setScanning] = useState(false);
+  const [scanMessages, setScanMessages] = useState([]);
 
   const inputContainerStyle = {
     position: 'relative',
@@ -33,12 +36,19 @@ const App = () => {
     top: '0',
     height: '100%',
     padding: '20px',
+    width: '100px', // Fixed width
     fontSize: '16px',
     borderRadius: '0 5px 5px 0',
     border: 'none',
     background: '#005A7B',
     color: '#FFF',
     cursor: 'pointer',
+  };
+
+  const scanMessagesStyle = {
+    marginTop: '10px',
+    color: '#005A7B',
+    textAlign: 'left',
   };
 
   const containerStyle = {
@@ -79,7 +89,26 @@ const App = () => {
   };
 
   const handleScan = () => {
-    alert('Scanning...');
+    setScanning(true);
+    setScanMessages([]);
+
+    // Simulate scanning steps with timeouts
+    const scanSteps = [
+      'Scanning the domain name...',
+      'Checking the SSL certificate...',
+      'Analyzing potential threats...',
+    ];
+
+    scanSteps.forEach((step, index) => {
+      setTimeout(() => {
+        setScanMessages((prevMessages) => [...prevMessages, step]);
+      }, index * 2000); // Adjust the delay as needed
+    });
+
+    // Finish scanning after all steps are completed
+    setTimeout(() => {
+      setScanning(false);
+    }, scanSteps.length * 2000 + 1000); // Adjust the delay as needed
   };
 
   return (
@@ -94,10 +123,17 @@ const App = () => {
           </div>
           <div style={inputContainerStyle}>
             <input type="text" placeholder="Type something..." style={inputStyle} />
-            <button onClick={handleScan} style={scanButtonStyle}>
-              Scan
+            <button onClick={handleScan} style={scanButtonStyle} disabled={scanning}>
+              {scanning ? 'Scanning...' : 'Scan'}
             </button>
           </div>
+          {scanning && (
+            <div style={scanMessagesStyle}>
+              {scanMessages.map((message, index) => (
+                <div key={index}>{message}</div>
+              ))}
+            </div>
+          )}
         </div>
         <div style={containerStyle}>
           <img src={male} alt="" style={{ width: '100%', borderRadius: '10px' }} />
