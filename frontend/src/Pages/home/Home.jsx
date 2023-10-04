@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import male from './male.png';
+import { useNavigate } from 'react-router-dom';
 
 const App = () => {
   const gradientColors = [
@@ -10,7 +11,8 @@ const App = () => {
     '#DBDAE0',
     '#FAE8E1',
   ];
-
+const [inputUrl, setInputUrl] = useState('');
+  const navigate = useNavigate();
   const [scanning, setScanning] = useState(false);
   const [scanMessages, setScanMessages] = useState([]);
 
@@ -21,22 +23,18 @@ const App = () => {
   };
 
   const inputStyle = {
-    width: '100%',
+    width: 'calc(100% - 120px)', // Adjusted width
     padding: '20px',
     fontSize: '16px',
-    borderRadius: '5px',
+    borderRadius: '5px 0 0 5px', // Adjusted border-radius
     border: 'none',
     boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
     boxSizing: 'border-box',
   };
 
   const scanButtonStyle = {
-    position: 'absolute',
-    right: '0',
-    top: '0',
+    width: '120px',
     height: '100%',
-    padding: '20px',
-    width: '100px', // Fixed width
     fontSize: '16px',
     borderRadius: '0 5px 5px 0',
     border: 'none',
@@ -57,6 +55,7 @@ const App = () => {
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
     flex: '1',
     boxSizing: 'border-box',
+    overflow: 'hidden', // Ensure the image doesn't overflow
   };
 
   const contentStyle = {
@@ -68,6 +67,7 @@ const App = () => {
     maxWidth: '1200px',
     margin: '0 auto',
     textAlign: 'center',
+    padding: '40px', // Added padding
   };
 
   const gradientStyle = {
@@ -81,48 +81,71 @@ const App = () => {
   const quoteStyle = {
     fontSize: '24px',
     fontWeight: 'bold',
-    marginBottom: '3rem',
+    marginBottom: '1rem', // Adjusted margin
     color: '#333',
     display: 'flex',
     flexDirection: 'column',
     gap: '1rem',
   };
+const handleScan = () => {
+  setScanning(true);
+  setScanMessages([]);
 
-  const handleScan = () => {
-    setScanning(true);
-    setScanMessages([]);
+  // Simulate scanning steps with timeouts
+  const scanSteps = [
+    'Scanning the domain name...',
+    'Checking the SSL certificate...',
+    'Analyzing potential threats...',
+  ];
 
-    // Simulate scanning steps with timeouts
-    const scanSteps = [
-      'Scanning the domain name...',
-      'Checking the SSL certificate...',
-      'Analyzing potential threats...',
-    ];
-
-    scanSteps.forEach((step, index) => {
+  const scanPromises = scanSteps.map((step, index) => {
+    return new Promise((resolve) => {
       setTimeout(() => {
         setScanMessages((prevMessages) => [...prevMessages, step]);
-      }, index * 2000); // Adjust the delay as needed
+        resolve();
+      }, index * 2000);
     });
+  });
 
-    // Finish scanning after all steps are completed
+  // Navigate to the /results route after scanning is complete
+  Promise.all(scanPromises).then(() => {
     setTimeout(() => {
+      console.log('inputUrl before navigating:', inputUrl);
       setScanning(false);
-    }, scanSteps.length * 2000 + 1000); // Adjust the delay as needed
-  };
+       navigate('/results', { state: { inputUrl } });
+    }, 1000); // Adjust the delay as needed
+  });
 
+  // Finish scanning after all steps are completed
+  setTimeout(() => {
+    setScanning(false);
+  }, scanSteps.length * 2000 + 1000); // Adjust the delay as needed
+};
+
+// Move this part inside the handleScan function or remove it
+// ...
+
+ 
+
+
+
+    
   return (
     <div style={gradientStyle}>
       <div style={contentStyle}>
         <div style={quoteStyle}>
-          <div style={quoteStyle}>
-            Guardians of the Net: Where Safety Meets Cyber.
-            <div>
-              PhishNet - Your Shield Against Phishing Threats in Real-Time.
-            </div>
-          </div>
+          Guardians of the Net: Where Safety Meets Cyber.
+          <div>PhishNet - Your Shield Against Phishing Threats in Real-Time.</div>
           <div style={inputContainerStyle}>
-            <input type="text" placeholder="Type something..." style={inputStyle} />
+            <input
+  type="text"
+  placeholder="Type something..."
+  style={inputStyle}
+  value={inputUrl} // Ensure it's bound to the state
+  onChange={(e) => setInputUrl(e.target.value)}
+  disabled={scanning}
+/>
+
             <button onClick={handleScan} style={scanButtonStyle} disabled={scanning}>
               {scanning ? 'Scanning...' : 'Scan'}
             </button>
@@ -144,3 +167,4 @@ const App = () => {
 };
 
 export default App;
+

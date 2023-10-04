@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import './ScanHistory.css'; // Import your CSS file for styling
 
 const ScanHistory = () => {
-  // Sample scan history data
   const sampleScanHistory = [
     { date: '2023-10-01', url: 'https://example.com', suspicious: false },
     { date: '2023-09-28', url: 'https://phishingsite.com', suspicious: true },
@@ -9,13 +9,12 @@ const ScanHistory = () => {
     // Add more entries as needed
   ];
 
-  // State to manage the displayed scan history
   const [scanHistory, setScanHistory] = useState(sampleScanHistory);
 
   return (
     <div>
       <h2>Scan History</h2>
-      <table>
+      <table className="scan-history-table">
         <thead>
           <tr>
             <th>Date</th>
@@ -25,7 +24,7 @@ const ScanHistory = () => {
         </thead>
         <tbody>
           {scanHistory.map((entry, index) => (
-            <tr key={index}>
+            <tr key={index} className={entry.suspicious ? 'suspicious-row' : ''}>
               <td>{entry.date}</td>
               <td>{entry.url}</td>
               <td>{entry.suspicious ? 'Yes' : 'No'}</td>

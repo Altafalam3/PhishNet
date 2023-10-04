@@ -1,0 +1,24 @@
+/* ScanHistory.css */
+
+.scan-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.scan-history-table th,
+.scan-history-table td {
+    border: 1px solid green;
+    padding: 8px;
+    text-align: left;
+    color: #333; /* Text color for regular rows */
+}
+
+.scan-history-table th {
+    background-color: #f2f2f2;
+}
+
+.suspicious-row {
+    background-color: #ffdddd;
+    color: red; /* Text color for suspicious rows */
+}
