@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserProvider } from "./context/UserContext";
 import Home from "./Pages/home/Home";
 import Report from "../src/Pages/report/Report";
+import Premium from "./Pages/payment/Premium";
 function App() {
     return (
         <UserProvider>
@@ -16,6 +17,8 @@ function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path="/" element={<Home />} />
                         <Route path="/report" element={<Report />} />
+                        <Route path="/getpremium" element={<Premium />} />
+
                     </Routes>
                     <Footer />
                 </BrowserRouter>

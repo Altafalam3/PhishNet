@@ -9,6 +9,7 @@ import usersRoute from "./routes/users.js"
 import lawyerRoute from "./routes/Lawyer.js"
 
 import contactRoute from "./routes/contact.js"
+import paymentRoutes from "./routes/payment.js";
 
 
 const app = express()
@@ -56,12 +57,10 @@ app.use(cookieParser());
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/lawyer", lawyerRoute);
+app.use("/api/pay", paymentRoutes)
 
 
 app.use("/api/contact", contactRoute);
-
-
-
 
 app.use((err, req, res, next) => {
    const errorStatus = err.status || 500;
