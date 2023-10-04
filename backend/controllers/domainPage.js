@@ -1,4 +1,7 @@
 import DomainPage from "../models/DomainPage.js";
+import nodemailer from "nodemailer";
+
+
 
 // Create a new DomainPage
 export const createDomainPage = async (req, res) => {
@@ -12,6 +15,44 @@ export const createDomainPage = async (req, res) => {
          // If it exists, increment the count and update the document
          existingDomainPage.count += 1;
          await existingDomainPage.save();
+
+         //Mail
+
+         if(existingDomainPage.count > 5 ){
+            console.log("Sending Alert Mail")
+            const transporter = nodemailer.createTransport({
+               service:"Gmail",
+               auth: {
+                  // TODO: replace `user` and `pass` values from <https://forwardemail.net>
+                  user: "phishnet8@gmail.com",
+                  pass: "ucyq yngk uiwj cwji",
+               },
+               });
+               
+               const options = {
+                     from: 'phishnet8@gmail.com', // sender address
+                     to: "altaf526687@gmail.com,darshilmarathe24@gmail.com", // list of receivers
+                     subject: "Reporting Malicious Networks✔", // Subject line
+                     text: `Urgently request your expertise as a cybercrime specialist to review the website ${domainName}. Numerous user reports have raised concerns about its potential involvement in phishing or malicious activities. Your assessment is crucial in determining the legitimacy and threat level of this website, ensuring the safety of online users..`, // plain text body
+                     // template: 'email.handlebars',
+                     // template: 'email.handlebars',
+                     // context: {
+                     //    subject: 'Phishing Website Alert',
+                     //    body: ``,
+                     //    year: 2023,
+                     //    name: 'Team PhishNet'
+                     // }
+                     };
+               
+               transporter.sendMail(options,function(err,info){
+                  if(err){
+                     console.log(err);
+                     return;
+                  }
+                  console.log("SENT : " + info.response);
+               })
+   
+         }
          return res.status(200).json(existingDomainPage);
       } else {
          // If it doesn't exist, create a new document
