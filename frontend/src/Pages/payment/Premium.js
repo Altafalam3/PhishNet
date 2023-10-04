@@ -14,6 +14,7 @@ export default function Premium() {
     "#DBDAE0",
     "#FAE8E1",
   ];
+
   const gradientStyle = {
     background: `linear-gradient(to right, ${gradientColors.join(",")})`,
     minHeight: "80vh",
@@ -28,6 +29,10 @@ export default function Premium() {
         alert("You are not logged in.");
         return;
         // return navigate("/login");
+      }
+      if(userr.isPremium){
+        alert('Premium is already there');
+        return;
       }
       // console.log("Hanlde")
       const orderUrl = "http://localhost:8800/api/pay/orders";
@@ -97,7 +102,7 @@ export default function Premium() {
           <h1>We scale with your needs</h1>
           <h4>
             Protect your company and brand with the following
-            options
+            options {userr.isPremium}
           </h4>
         </div>
         <div className="premium_flex">
