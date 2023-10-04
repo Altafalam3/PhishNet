@@ -1,0 +1,413 @@
+#LoginReg {
+   /* padding-top: 150px; */
+   width: 95%;
+   max-width: 1024px;
+   height: 700px;
+   position: relative;
+   border-radius: 20px;
+   /* box-shadow: 0 14px 28px -10px rgba(0, 0, 0, 0.1), 0 10px 10px -10px rgba(0, 0, 0, 0.02); */
+   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+   transform-style: preserve-3d;
+   margin-left: 15%;
+   margin-top: 2%;
+}
+
+#LoginReg>div {
+   position: absolute;
+   width: 50%;
+   min-width: 350px;
+   height: 100%;
+   top: 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+#LoginReg .content {
+   width: 100%;
+   padding: 2em 4em;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   text-align: center;
+}
+
+#LoginReg .content p {
+   font-size: 1.4em;
+}
+
+.Login {
+   left: 0;
+   background: #fafafa;
+   border-radius: 20px 0 0 20px;
+}
+
+.Login button {
+   margin-top: 25px;
+   width: 50%;
+
+   margin-top: 25px;
+}
+
+.Login .content img {
+   width: 300px;
+   height: 300px;
+   border-radius: 5px;
+   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+   margin-bottom: 15px;
+}
+
+.Register {
+   right: 0;
+   z-index: 1;
+   border-radius: 0 20px 20px 0;
+   background: #fafafa;
+}
+
+.Register .content button {
+   /* border-radius: 0px; */
+   /* width: 50%; */
+   margin-top: 25px;
+}
+
+.Register svg {
+   margin: 1em;
+   stroke: #999;
+}
+
+.Register .content img {
+   width: 300px;
+   height: 300px;
+   border-radius: 5px;
+   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+   margin-bottom: 15px;
+}
+
+.page {
+   right: 0;
+   color: #fff;
+   border-radius: 0 20px 20px 0;
+   transform-origin: left center;
+   transition: -webkit-animation 1s linear;
+   transition: animation 1s linear;
+   transition: animation 1s linear, -webkit-animation 1s linear;
+}
+
+.page p {
+   margin: 2em auto;
+}
+
+.page button {
+   margin-top: 25px;
+}
+
+.front {
+   /* background: linear-gradient(-45deg, #FFCF00 0%, #FC4F4F 100%) no-repeat 0 0/200%; */
+   /* background-color: #a04625; */
+   background-image: url('https://imagery.hoteltonight.com/mobile_web/featured/santa-monica-proper-hotel-bed.jpg?fp-x=0.5&fp-y=0.55&fit=crop&dpr=1&fm=pjpg&q=25&w=1200&h=500&auto=compress');
+   background-size: cover;
+   background-repeat: no-repeat;
+   z-index: 3;
+}
+
+.back {
+   background-image: url('https://imagery.hoteltonight.com/mobile_web/featured/santa-monica-proper-hotel-bed.jpg?fp-x=0.5&fp-y=0.55&fit=crop&dpr=1&fm=pjpg&q=25&w=1200&h=500&auto=compress');
+   z-index: 2;
+   background-size: cover;
+   background-repeat: no-repeat;
+}
+
+.back .content {
+   transform: rotateY(180deg);
+}
+
+.active .front {
+   -webkit-animation: rot-front 0.6s ease-in-out normal forwards;
+   animation: rot-front 0.6s ease-in-out normal forwards;
+}
+
+.active .back {
+   -webkit-animation: rot-back 0.6s ease-in-out normal forwards;
+   animation: rot-back 0.6s ease-in-out normal forwards;
+}
+
+.close .front {
+   -webkit-animation: close-rot-front 0.6s ease-in-out normal forwards;
+   animation: close-rot-front 0.6s ease-in-out normal forwards;
+}
+
+.close .back {
+   -webkit-animation: close-rot-back 0.6s ease-in-out normal forwards;
+   animation: close-rot-back 0.6s ease-in-out normal forwards;
+}
+
+@-webkit-keyframes rot-front {
+   from {
+      transform: translateZ(2px) rotateY(0deg);
+   }
+
+   to {
+      transform: translateZ(1px) rotateY(-180deg);
+   }
+}
+
+@keyframes rot-front {
+   from {
+      transform: translateZ(2px) rotateY(0deg);
+   }
+
+   to {
+      transform: translateZ(1px) rotateY(-180deg);
+   }
+}
+
+@-webkit-keyframes close-rot-front {
+   from {
+      transform: translateZ(1px) rotateY(-180deg);
+   }
+
+   to {
+      transform: translateZ(2px) rotateY(0deg);
+   }
+}
+
+@keyframes close-rot-front {
+   from {
+      transform: translateZ(1px) rotateY(-180deg);
+   }
+
+   to {
+      transform: translateZ(2px) rotateY(0deg);
+   }
+}
+
+@-webkit-keyframes rot-back {
+   from {
+      transform: translateZ(1px) rotateY(0deg);
+   }
+
+   to {
+      transform: translateZ(2px) rotateY(-180deg);
+   }
+}
+
+@keyframes rot-back {
+   from {
+      transform: translateZ(1px) rotateY(0deg);
+   }
+
+   to {
+      transform: translateZ(2px) rotateY(-180deg);
+   }
+}
+
+@-webkit-keyframes close-rot-back {
+   from {
+      transform: translateZ(2px) rotateY(-180deg);
+   }
+
+   to {
+      transform: translateZ(1px) rotateY(0deg);
+   }
+}
+
+@keyframes close-rot-back {
+   from {
+      transform: translateZ(2px) rotateY(-180deg);
+   }
+
+   to {
+      transform: translateZ(1px) rotateY(0deg);
+   }
+}
+
+.active .register .content {
+   -webkit-animation: show 0.7s ease-in-out normal forwards;
+   animation: show 0.7s ease-in-out normal forwards;
+}
+
+.close .register .content {
+   -webkit-animation: hide 0.7s ease-in-out normal forwards;
+   animation: hide 0.7s ease-in-out normal forwards;
+}
+
+.active .login .content {
+   -webkit-animation: hide 0.7s ease-in-out normal forwards;
+   animation: hide 0.7s ease-in-out normal forwards;
+}
+
+.close .login .content {
+   -webkit-animation: show 0.7s ease-in-out normal forwards;
+   animation: show 0.7s ease-in-out normal forwards;
+}
+
+@-webkit-keyframes show {
+   from {
+      opacity: 0;
+      transform: scale(0.8);
+   }
+
+   to {
+      opacity: 0.99;
+      transform: scale(0.99);
+   }
+}
+
+@keyframes show {
+   from {
+      opacity: 0;
+      transform: scale(0.8);
+   }
+
+   to {
+      opacity: 0.99;
+      transform: scale(0.99);
+   }
+}
+
+@-webkit-keyframes hide {
+   from {
+      opacity: 0.99;
+      transform: scale(0.99);
+   }
+
+   to {
+      opacity: 0;
+      transform: scale(0.8);
+   }
+}
+
+@keyframes hide {
+   from {
+      opacity: 0.99;
+      transform: scale(0.99);
+   }
+
+   to {
+      opacity: 0;
+      transform: scale(0.8);
+   }
+}
+
+.page button {
+   border-color: red;
+   background: transparent;
+   padding: 20px;
+   color: red;
+   border-radius: 15px;
+}
+
+.Login .content h1 {
+   font-size: 45px;
+   margin-bottom: 50px;
+}
+
+.inp {
+   position: relative;
+   margin: auto;
+   width: 100%;
+   max-width: 390px;
+   border-radius: 3px;
+   overflow: hidden;
+   margin-bottom: 25px;
+}
+
+.inp .label {
+   position: absolute;
+   top: 20px;
+   left: 12px;
+   font-size: 14px;
+   color: rgba(0, 0, 0, 0.5);
+   font-weight: 500;
+   transform-origin: 0 0;
+   transform: translate3d(0, 0, 0);
+   transition: all 0.2s ease;
+   pointer-events: none;
+}
+
+.inp .focus-bg {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: rgba(0, 0, 0, 0.05);
+   z-index: -1;
+   transform: scaleX(0);
+   transform-origin: left;
+}
+
+.inp input {
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+   width: 100%;
+   border: 0;
+   font-family: inherit;
+   padding: 16px 12px 0 12px;
+   height: 70px;
+   font-size: 16px;
+   font-weight: 400;
+   background: rgba(0, 0, 0, 0.02);
+   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+   color: #000;
+   transition: all 0.15s ease;
+   -webkit-transition: all 0.15s ease;
+   -moz-transition: all 0.15s ease;
+   -ms-transition: all 0.15s ease;
+   -o-transition: all 0.15s ease;
+}
+
+.inp input:hover {
+   background: rgba(0, 0, 0, 0.04);
+   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.inp input:not(:-moz-placeholder-shown)+.label {
+   color: rgba(0, 0, 0, 0.5);
+   transform: translate3d(0, -12px, 0) scale(0.75);
+}
+
+.inp input:not(:-ms-input-placeholder)+.label {
+   color: rgba(0, 0, 0, 0.5);
+   transform: translate3d(0, -12px, 0) scale(0.75);
+}
+
+.inp input:not(:placeholder-shown)+.label {
+   color: rgba(0, 0, 0, 0.5);
+   transform: translate3d(0, -12px, 0) scale(0.75);
+}
+
+.inp input:focus {
+   background: rgba(0, 0, 0, 0.05);
+   outline: none;
+   box-shadow: inset 0 -2px 0 #0077ff;
+}
+
+.inp input:focus+.label {
+   color: #0077ff;
+   transform: translate3d(0, -12px, 0) scale(0.75);
+}
+
+.inp input:focus+.label+.focus-bg {
+   transform: scaleX(1);
+   transition: all 0.1s ease;
+}
+
+.LoginBtn {
+   width: 40%;
+   border-radius: 25px;
+   padding: 10px;
+   background: #0077ff;
+   border: none;
+   color: white;
+   font-weight: 700;
+   font-size: 15px;
+   cursor: pointer;
+   -webkit-border-radius: 25px;
+   -moz-border-radius: 25px;
+   -ms-border-radius: 25px;
+   -o-border-radius: 25px;
+}
