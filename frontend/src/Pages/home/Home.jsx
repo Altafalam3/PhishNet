@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 const App = () => {
   const gradientColors = [
-    '#67E0DD',
+    // 'white',
+        "#67E0DD",
     '#A6D8DF',
     '#C5E8E2',
     '#94BBDF',
@@ -50,9 +51,10 @@ const [inputUrl, setInputUrl] = useState('');
   };
 
   const containerStyle = {
-    background: '#E0E0E0',
+    background: 'white',
     borderRadius: '10px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    boxShadow: '8px',
+    //  8px 8px rgba(0, 0, 0, 0.1)',
     flex: '1',
     boxSizing: 'border-box',
     overflow: 'hidden', // Ensure the image doesn't overflow
@@ -72,6 +74,7 @@ const [inputUrl, setInputUrl] = useState('');
 
   const gradientStyle = {
     background: `linear-gradient(to right, ${gradientColors.join(',')})`,
+    backgroundColor:'white',
     minHeight: '80vh',
     display: 'flex',
     justifyContent: 'center',

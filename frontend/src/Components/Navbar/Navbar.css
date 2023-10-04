@@ -61,7 +61,7 @@
 
 .active {
     font-weight: 700;
-    background-color: indigo;
+    /* background-color: indigo; */
     /* font-size: 25px; */
     padding: 5px 8px;
     border-radius: 20px;
@@ -69,7 +69,8 @@
 }
 
 .active a {
-    color: white;
+    /* color: white; */
+    color: #1e2340;
 }
 
 .active-icon {

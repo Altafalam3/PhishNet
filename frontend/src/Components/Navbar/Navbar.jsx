@@ -34,10 +34,11 @@ const Navbar = () => {
     }
   };
 
-  const gradientColors = ['#67E0DD', '#A6D8DF', '#C5E8E2', '#94BBDF', '#DBDAE0', '#FAE8E1'];
+  const gradientColors =['#67E0DD', '#A6D8DF', '#C5E8E2', '#94BBDF', '#DBDAE0', '#FAE8E1'];
 
   const gradientStyle = {
     background: `linear-gradient(to right, ${gradientColors.join(',')})`,
+    backgroundColor:'white'
   };
 
   return (

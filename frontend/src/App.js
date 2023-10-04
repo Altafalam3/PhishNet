@@ -9,6 +9,8 @@ import Report from "../src/Pages/report/Report";
 import Premium from "./Pages/payment/Premium";
 import Dashboard from "./Pages/dashboard/Dashboard";
 import Result from "./Pages/result/Result";
+import AllReports from "./Pages/allreports/AllReports";
+
 function App() {
     return (
         <UserProvider>
@@ -22,6 +24,7 @@ function App() {
                         <Route path="/dashboard" element={<Dashboard />} />
                         <Route path="/getpremium" element={<Premium />} />{" "}
                         <Route path="/results" element={<Result />} />
+                        <Route path="/allreports" element={<AllReports />} />
                     </Routes>
                     <Footer />
                 </BrowserRouter>

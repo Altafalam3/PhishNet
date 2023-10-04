@@ -41,6 +41,12 @@ const Navbarlist = () => {
       url:"/getPremium",
       cName :"Navlinks",
       // icon: faBalanceScale,
+    },
+     {
+      title : "Reports",
+      url:"/allreports",
+      cName :"Navlinks",
+      // icon: faBalanceScale,
     }
   ];
 
