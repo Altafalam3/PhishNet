@@ -4,137 +4,129 @@ import
  from 'react-icons/bs'
  import 
  { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } 
- from 'recharts';
+       from 'recharts';
+import CoinsCard from './CoinsCard'
+import LeaderboardCard from './LeaderboardCard';
+import PhishingReportCard from './PhishingReportCard';
+import UserSettingsCard from './UserSettingsCard'
+import SecurityRecommendationsCard from './SecurityRecommendationsCard';
+import ScanHistory from './ScanHistory';
 
 function Home() {
+// Assuming 'reports' is an array of report objects
 
-    const data = [
-        {
-          name: 'Page A',
-          uv: 4000,
-          pv: 2400,
-          amt: 2400,
-        },
-        {
-          name: 'Page B',
-          uv: 3000,
-          pv: 1398,
-          amt: 2210,
-        },
-        {
-          name: 'Page C',
-          uv: 2000,
-          pv: 9800,
-          amt: 2290,
-        },
-        {
-          name: 'Page D',
-          uv: 2780,
-          pv: 3908,
-          amt: 2000,
-        },
-        {
-          name: 'Page E',
-          uv: 1890,
-          pv: 4800,
-          amt: 2181,
-        },
-        {
-          name: 'Page F',
-          uv: 2390,
-          pv: 3800,
-          amt: 2500,
-        },
-        {
-          name: 'Page G',
-          uv: 3490,
-          pv: 4300,
-          amt: 2100,
-        },
-      ];
-     
+  const reports = [
+  { date: '2023-10-01', status: 'Pending', outcome: 'In review' },
+  { date: '2023-09-25', status: 'Closed', outcome: 'No threat detected' },
+  { date: '2023-09-20', status: 'Open', outcome: 'Under investigation' },
+  // Add more reports as needed
+       ];
+       const recommendations = ['Enable two-factor authentication', 'Update your passwords', 'Install antivirus software'];
+
+
+const coins = 100;
+const leaderboard = [
+  { name: 'John Doe', submitted: 15 },
+  { name: 'Alice Smith', submitted: 12 },
+  { name: 'Bob Johnson', submitted: 10 },
+  // Add more leaderboard entries as needed
+];
+
+const settings = {
+  name: 'Your Name',
+  email: 'your.email@example.com',
+  isPremium: true,
+  // Add more settings as needed
+};
+
+   const data = [
+  { date: '2023-03-01', status: 'Processed', outcome: 'Phishing' },
+  { date: '2023-03-01', status: 'Processed', outcome: 'Phishing' },
+  { date: '2023-03-02', status: 'Pending', outcome: 'Suspicious' },
+  { date: '2023-03-03', status: 'Processed', outcome: 'Safe' },
+  { date: '2023-03-03', status: 'Processed', outcome: 'Phishing' },
+  { date: '2023-03-04', status: 'Processed', outcome: 'Phishing' },
+  { date: '2023-03-05', status: 'Pending', outcome: 'Suspicious' },
+  // Add more entries as needed
+];
+
+const phishingCountsPerDate = data.reduce((acc, entry) => {
+  const date = entry.date;
+  if (entry.outcome === 'Phishing') {
+    acc[date] = (acc[date] || 0) + 1;
+  }
+  return acc;
+}, {});
+
+const phishingChartData = Object.entries(phishingCountsPerDate).map(([date, count]) => ({ date, count }));
+
 
   return (
     <main className='main-container'>
         <div className='main-title'>
-            {/* <h3>DASHBOARD</h3> */}
+           
         </div>
 
         <div className='main-cards'>
             <div className='card'>
                 <div className='card-inner'>
-                    <h3>PRODUCTS</h3>
+                     <SecurityRecommendationsCard recommendations={recommendations} />
                     <BsFillArchiveFill className='card_icon'/>
                 </div>
-                <h1>300</h1>
+               
             </div>
             <div className='card'>
                 <div className='card-inner'>
-                    <h3>CATEGORIES</h3>
+                   <CoinsCard coins={coins} />
                     <BsFillGrid3X3GapFill className='card_icon'/>
                 </div>
-                <h1>12</h1>
             </div>
             <div className='card'>
                 <div className='card-inner'>
-                    <h3>CUSTOMERS</h3>
+                    <LeaderboardCard leaderboard={leaderboard} />
                     <BsPeopleFill className='card_icon'/>
                 </div>
-                <h1>33</h1>
+               
             </div>
             <div className='card'>
                 <div className='card-inner'>
-                    <h3>ALERTS</h3>
+                   <UserSettingsCard settings={settings} />
                     <BsFillBellFill className='card_icon'/>
                 </div>
-                <h1>42</h1>
             </div>
         </div>
 
         <div className='charts'>
-            <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-            }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="pv" fill="#8884d8" />
-                <Bar dataKey="uv" fill="#82ca9d" />
-                </BarChart>
-            </ResponsiveContainer>
 
-            <ResponsiveContainer width="100%" height="100%">
-                <LineChart
-                width={500}
-                height={300}
-                data={data}
-                margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                }}
-                >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-                </LineChart>
-            </ResponsiveContainer>
+
+     <ResponsiveContainer width='100%' height='100%'>
+  <LineChart
+    width={500}
+    height={300}
+    data={phishingChartData}
+    margin={{
+      top: 5,
+      right: 30,
+      left: 20,
+      bottom: 5,
+    }}
+  >
+    <CartesianGrid strokeDasharray='3 3' />
+    <XAxis dataKey='date' />
+    <YAxis
+      label={{ value: 'Phishing Count', angle: -90, position: 'insideLeft' }}
+      domain={[0, 'auto']}
+      allowDecimals={false} // Ensure whole numbers only
+      tickCount={5}
+      tickFormatter={(value) => `${value}`}
+    />
+    <Tooltip />
+    <Legend />
+    <Line type='monotone' dataKey='count' stroke='#8884d8' activeDot={{ r: 8 }} />
+  </LineChart>
+</ResponsiveContainer>
+<ScanHistory/>
+
 
         </div>
     </main>

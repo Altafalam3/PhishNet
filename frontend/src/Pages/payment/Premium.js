@@ -134,4 +134,8 @@ export default function Premium() {
             </div>
         </div>
     );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 444ca9ea8ed51bde8afaf315bbc352cb3b070b58

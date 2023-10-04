@@ -1,72 +1,70 @@
-.pre_heading{
+.pre_heading {
     padding: 30px;
-    background-color: #D3E1F9;
     min-height: 50vh;
     text-align: center;
 }
-.pre_heading h4{
-    color: #333333;
+.pre_heading h4 {
+    color: black;
     margin-top: 5vh;
 }
-.premium_flex{
+.premium_flex {
     display: flex;
     justify-content: space-around;
+    gap: 1rem;
 }
 
-.pre_flex1{
+.pre_flex1 {
     background-color: antiquewhite;
     width: 25vw;
     height: 50vh;
     text-align: center;
     /* position:absolute; */
-
 }
 
-.pre_head_flex{
+.pre_head_flex {
     font-size: 30px;
     margin-bottom: 35px;
     padding: 30px;
 }
 
-    .premium_page {
-        position: relative;
-    }
+.premium_page {
+    position: relative;
+}
 
-    .pre_flex1 {
-        width: 30vw;
-        position: relative;
-        top: -70px; /* Adjust this value to control the amount of overlap */
-        background-color: white; /* Add a background color to prevent content behind from showing */
-        z-index: 1; /* Ensure the overlapping elements are above the previous ones */
-    }
+.pre_flex1 {
+    width: 30vw;
+    position: relative;
+    top: -70px; /* Adjust this value to control the amount of overlap */
+    background-color: white; /* Add a background color to prevent content behind from showing */
+    z-index: 1; /* Ensure the overlapping elements are above the previous ones */
+}
 
-    /* Additional styling for the premium_flex container or other elements as needed */
-    .premium_flex {
-        display: flex;
-        justify-content: space-evenly;
-    }
+/* Additional styling for the premium_flex container or other elements as needed */
+.premium_flex {
+    display: flex;
+    justify-content: space-evenly;
+}
 
-    /* Rest of your CSS styles */
+/* Rest of your CSS styles */
 
-    .pre_body h3{
+.pre_body h3 {
+}
+.pre_body button {
+    width: 13vw;
+    height: 3vw;
+    border-radius: 6px;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
 
-    }
-    .pre_body button{
-        width: 13vw;
-        height: 3vw;
-        border-radius: 6px;
-        border: none;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-
-    .pre_b1{
-        background-color: #407CEA;
-        color: white;
-    }
-    .pre_b2{
-        background-color: #00C1B0;
-    }
-    .pre_b3{
-        background-color: #000000;
-        color: white;
-    }
+.pre_b1 {
+    background-color: #407cea;
+    color: white;
+}
+.pre_b2 {
+    background-color: #00c1b0;
+}
+.pre_b3 {
+    background-color: #000000;
+    color: white;
+}
