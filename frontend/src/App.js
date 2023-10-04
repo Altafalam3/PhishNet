@@ -20,7 +20,6 @@ function App() {
                         <Route path="/report" element={<Report />} />
                         <Route path="/dashboard" element={<Dashboard />} />
                         <Route path="/getpremium" element={<Premium />} />
-
                     </Routes>
                     <Footer />
                 </BrowserRouter>

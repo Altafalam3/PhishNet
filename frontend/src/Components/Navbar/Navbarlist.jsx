@@ -36,12 +36,12 @@ const Navbarlist = () => {
       url: "/dashboard",
       cName: "Navlinks",
     },
-    // {
-    //   title : "Advocates",
-    //   url:"/lawyers",
-    //   cName :"Navlinks",
-    //   icon: faBalanceScale,
-    // }
+    {
+      title : "Premium",
+      url:"/getPremium",
+      cName :"Navlinks",
+      // icon: faBalanceScale,
+    }
   ];
 
   return (
