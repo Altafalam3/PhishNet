@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const AllReports = () => {
-  const data = [
-    {
-      url: 'iddanakaget2023-2.vercel.app',
-      reportedBy: 'canyouhearmeouthere@gmail.com',
-      reportedOn: '7/8/2023, 3:18:46 pm',
-      description: 'Shared in my senior high school with Dana Id look like official account',
-    },
-    // Add more data as needed
-  ];
+  const [reportDomains, setReportDomains] = useState([]);
+
+  useEffect(() => {
+    // Fetch report domains from your Express API
+    axios.get('http://localhost:8800/api/reportdomain') // Update the URL to match your API route
+      .then((response) => {
+        setReportDomains(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching report domains:', error);
+      });
+  }, []);
 
   return (
     <div style={reportsContainer}>
@@ -23,12 +27,12 @@ const AllReports = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((report, index) => (
+          {reportDomains.map((report, index) => (
             <tr key={index} style={(index + 1) % 2 === 0 ? { background: '#f9f9f9' } : null}>
-              <td style={cellStyle}>{report.url}</td>
-              <td style={cellStyle}>{report.reportedBy}</td>
-              <td style={cellStyle}>{report.reportedOn}</td>
-              <td style={cellStyle}>{report.description}</td>
+              <td style={cellStyle}>{report.domainName}</td>
+              <td style={cellStyle}>{report.emailId}</td>
+              <td style={cellStyle}>{report.createdAt}</td> {/* Assuming createdAt field contains reported date */}
+              <td style={cellStyle}>{report.details}</td>
             </tr>
           ))}
         </tbody>
@@ -40,12 +44,12 @@ const AllReports = () => {
 const cellStyle = {
   padding: '10px',
   border: '1px solid #ddd',
-       textAlign: 'left',
-  color:'black',
+  textAlign: 'left',
+  color: 'black',
 };
 const reportsContainer = {
-       overflow: 'hidden',
-       margin:'2rem',
+  overflow: 'hidden',
+  margin: '2rem',
 };
 
 export default AllReports;
