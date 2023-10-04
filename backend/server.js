@@ -10,7 +10,7 @@ import lawyerRoute from "./routes/Lawyer.js"
 
 import contactRoute from "./routes/contact.js"
 import paymentRoutes from "./routes/payment.js";
-
+import domainPage from "./routes/domainPage.js";
 
 const app = express()
 dotenv.config()
@@ -74,6 +74,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/lawyer", lawyerRoute);
 app.use("/api/pay", paymentRoutes)
+app.use("/api/domainpage", domainPage)
 
 
 app.use("/api/contact", contactRoute);

@@ -56,7 +56,7 @@ router.post("/verify", async (req, res) => {
 				status: true,
 				razorpay_order_id,
 				razorpay_payment_id,
-				user: updatedUser,
+				user: updatedUser
 			});
 		} else {
 			return res.status(400).json({ message: "Invalid signature sent!", status: false });
@@ -67,7 +67,4 @@ router.post("/verify", async (req, res) => {
 	}
 });
 
-
-
-
-export default router
+export default router;
