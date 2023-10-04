@@ -48,7 +48,7 @@ const Navbarlist = () => {
     <>
       {navbarList.map((item, index) => {
         const isActive = location.pathname === item.url;
-        const iconClass = isActive ? "active-icon" : "";
+        const iconClass = isActive ? "" : "";
         const linkClass = isActive ? "active" : "";
         return (
           <div>

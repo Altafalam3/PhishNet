@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className='grid-container'>
-      <Header />
+      {/* <Header /> */}
       {/* <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar}/> */}
       <Home />
     </div>
