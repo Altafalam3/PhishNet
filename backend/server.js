@@ -14,9 +14,25 @@ import contactRoute from "./routes/contact.js"
 const app = express()
 dotenv.config()
 
+// const corsOptions = {
+//    origin: 'http://localhost:3000',
+//    credentials: true,
+// };
+
+const allowedOrigins = ["http://localhost:5500", "http://localhost:3000", "chrome-extension://eafifecgdjhbdnmpodidiiodfdhgofnh"];
+
+// Configure CORS to allow requests from the specified origins
 const corsOptions = {
-   origin: 'http://localhost:3000',
+   origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+         callback(null, true);
+      } else {
+         callback(new Error("Not allowed by CORS"));
+      }
+   },
+   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
    credentials: true,
+   optionsSuccessStatus: 204,
 };
 
 app.use(cors(corsOptions));

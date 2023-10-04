@@ -4,6 +4,10 @@
     "description": "latest covid data of UK",
     "manifest_version": 3,
     "author": "Sampurna Chapagain",
+    "permissions": [
+        "tabs",
+        "activeTab"
+      ],
     "action":{
         "default_popup": "index.html",  
         "default_title": "Latest Covid Report"
