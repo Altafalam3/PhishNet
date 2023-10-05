@@ -32,9 +32,25 @@ const Result = () => {
     }
   };
 
+  const [modelOutput, setModelOutput] = useState({});
+
+  const sendModel = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/analyze_url', { url: state.inputUrl });
+
+      // Handle the response from the backend as needed
+      console.log('Report submitted successfully:', response.data);
+
+      setModelOutput(response.data);
+    } catch (error) {
+      console.error('Error submitting report:', error);
+    }
+  };
+
+
   useEffect(() => {
     fetchIpLocation();
-
+    sendModel();
   }, []);
 
 
@@ -128,39 +144,40 @@ const Result = () => {
     padding: "4vh 10vw",
   };
 
-  if (!fetchd) {
+  if (!fetchd || !modelOutput) {
     return <div>Loading .....</div>
   }
 
   return (
     <div style={containerStyle}>
       <div className="card-container">
-      {/* Card 1 */}
-      <div className="card">
-        {/* Card content goes here */}
-          <h1>hi</h1>
-          <h2>bye</h2>
-          <h3>see ya</h3>
-      </div>
+        {/* Card 1 */}
+        <div className="card">
+          <h2>Combined Score : </h2>
+          {
+            modelOutput.combined_score &&
+            <h1>{modelOutput.combined_score.toFixed(2)}</h1>
+          }
+        </div>
 
-      {/* Card 2 */}
-      <div className="card">
-          {/* Card content goes here */}
-           <h1>hi</h1>
-          <h2>bye</h2>
-          <h3>see ya</h3>
-        Card 2
-      </div>
+        {/* Card 2 */}
+        <div className="card">
+          <h2>Probability Score : </h2>
+          {
+            modelOutput.model_probability_score &&
+            <h1>{modelOutput.model_probability_score.toFixed(2)}</h1>
+          }
+        </div>
 
-      {/* Card 3 */}
-      <div className="card">
-          {/* Card content goes here */}
-           <h1>hi</h1>
-          <h2>bye</h2>
-          <h3>see ya</h3>
-        Card 3
+        {/* Card 3 */}
+        <div className="card">
+          <h2>Prediction Score : </h2>
+          {
+            modelOutput.prediction_score &&
+            <h1>{modelOutput.prediction_score.toFixed(2)}</h1>
+          }
+        </div>
       </div>
-    </div>
       <div style={statusStyle}>
         <p style={{ ...urlTextStyle, color: 'black' }}>{state && state.inputUrl}</p>
       </div>

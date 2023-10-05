@@ -13,12 +13,6 @@ const Navbarlist = () => {
   const location = useLocation();
 
   const navbarList = [
-    // {
-    //   title: "Chatbot",
-    //   url: "/chatbot",
-    //   cName: "Navlinks",
-    //   icon: faHome,
-    // },
     {
       title: "Home",
       url: "/",
@@ -47,7 +41,14 @@ const Navbarlist = () => {
       url:"/allreports",
       cName :"Navlinks",
       // icon: faBalanceScale,
-    }
+    },
+    {
+      title: "Typo Squatting",
+      url: "http://127.0.0.1:7005",
+      cName: "Navlinks",
+      // icon: faHome,
+    },
+
   ];
 
   return (

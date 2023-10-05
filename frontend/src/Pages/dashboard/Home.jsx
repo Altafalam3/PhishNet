@@ -69,33 +69,35 @@ function Home() {
       </div>
 
       <div className='main-cards'>
-        <div className='card'>
-          <div className='card-inner'>
-            <SecurityRecommendationsCard recommendations={recommendations} />
-            <BsFillArchiveFill className='card_icon' />
-          </div>
+  <div className='card' style={{ width: '20rem', height: '15rem' }}>
+    <div className='card-inner'>
+      <SecurityRecommendationsCard recommendations={recommendations} />
+      <BsFillArchiveFill className='card_icon' />
+    </div>
+  </div>
 
-        </div>
-        <div className='card'>
-          <div className='card-inner'>
-            <CoinsCard coins={coins} />
-            <BsFillGrid3X3GapFill className='card_icon' />
-          </div>
-        </div>
-        <div className='card'>
-          <div className='card-inner'>
-            <LeaderboardCard leaderboard={leaderboard} />
-            <BsPeopleFill className='card_icon' />
-          </div>
+  <div className='card' style={{width: '20rem', height: '15rem' }}>
+    <div className='card-inner'>
+      <CoinsCard coins={coins} />
+      <BsFillGrid3X3GapFill className='card_icon' />
+    </div>
+  </div>
 
-        </div>
-        <div className='card'>
-          <div className='card-inner'>
-            <UserSettingsCard settings={settings} />
-            <BsFillBellFill className='card_icon' />
-          </div>
-        </div>
-      </div>
+  <div className='card' style={{ width: '20rem', height: '15rem' }}>
+    <div className='card-inner'>
+      <LeaderboardCard leaderboard={leaderboard} />
+      <BsPeopleFill className='card_icon' />
+    </div>
+  </div>
+
+  <div className='card' style={{ width: '20rem', height: '15rem' }}>
+    <div className='card-inner'>
+      <UserSettingsCard settings={settings} />
+      <BsFillBellFill className='card_icon' />
+    </div>
+  </div>
+</div>
+
 
       <div className='charts'>
 

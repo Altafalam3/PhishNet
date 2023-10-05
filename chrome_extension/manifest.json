@@ -1,15 +1,23 @@
 {
-    "name": "PhishNet",
-    "version": "1.0.0",
-    "description": "PhishNet",
-    "manifest_version": 3,
-    "author": "PhishNet",
-    "permissions": [
-        "tabs",
-        "activeTab"
-      ],
-    "action":{
-        "default_popup": "index.html",  
-        "default_title": "PhishNet"
-    }
+  "name": "PhishNet",
+  "version": "1.0.0",
+  "description": "PhishNet",
+  "manifest_version": 3,
+  "author": "PhishNet",
+  "permissions": ["tabs", "activeTab", "scripting"],
+
+  "content_security_policy": {
+    "script-src": "self",
+    "object-src": "self"
+  },
+
+  "host_permissions": ["https://localhost:5000/"],
+
+  "background": {
+    "service_worker": "script.js"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "PhishNet"
+  }
 }

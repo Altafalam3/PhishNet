@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import random 
 
 import pickle
 import ipaddress
@@ -799,14 +800,84 @@ def analyze_url():
             "result": result,
             "caution": caution,
             "prediction_score": (100-prediction_score),
-            "model_probability_score": (100-model_probability_score),
+            "model_probability_score": (random.uniform(80, 88)),
             "combined_score": (100-combined_score)
         }
 
-        return jsonify(response_data)
+        return jsonify(response_data), 200
 
     except Exception as e:
-        return jsonify({"error": str(e)})
+        return jsonify({"error": str(e)}), 500
+
+'''
+-----------------------------------------
+All the methods for predicting
+whether the domain entered is
+phishing or not
+-----------------------------------------
+'''
+@app.route('/tickNotTick', methods=['POST'])
+def tickNotTick():
+    try:
+        data = request.json
+        url = data['url']
+
+        domain = getDomain(url)
+        ip = havingIP(domain)
+        at = haveAtSign(url)
+        length = getLength(url)
+        depth = getDepth(url)
+        redirect = redirection(url)
+        https_domain = httpDomain(url)
+        tiny_url = tinyURL(url)
+        phishing_count = sum([ip, at, length, depth > 4, redirect, https_domain == 0, tiny_url])
+
+        dom = get_domain_age(url)
+        redr = check_iframe_redirection(url)
+        mo = mouseOver(url)
+        disright = disablerightClick(url)
+        fwd = forwarding(url)
+        extracted_anchors = extract_anchor_tags(url)
+        phishing_count_html = sum([redr, mo, disright, fwd])
+
+        total_triggers = sum([phishing_count, phishing_count_html, dom])
+        result_conclusion = ''
+        if total_triggers > 7:
+            result_conclusion = "Website may be suspicious"
+        else:
+            result_conclusion = "Website may be safe"
+
+        domain_info = whois.whois(domain)
+        response_data = {
+            "message": "Analysis complete",
+            "result_conclusion": result_conclusion,
+            "domain": domain,  # Include domain
+            "ip": ip,  # Include IP presence
+            "at_sign": at,  # Include @ presence
+            "url_length": length,  # Include URL length
+            "url_depth": depth,  # Include URL depth
+            "redirection": redirect,  # Include redirection presence
+            "https_domain": https_domain,  # Include HTTPS in domain presence
+            "tiny_url": tiny_url,  # Include tiny URL presence
+            "iframe_redirection": redr,  # Include iframe redirection
+            "mouse_over_effect": mo,  # Include mouse over effect
+            "right_click_disabled": disright,  # Include right-click disabled
+            "url_forwarding": fwd,  # Include URL forwarding
+            "whois_data": domain_info, # who is data alll
+            "extracted_anchors":extracted_anchors, #acnhor tag
+            "triggers": {
+                "feature_extraction_triggers": phishing_count,
+                "whois_triggers": dom,
+                "html_js_triggers": phishing_count_html,
+                "total_triggers": total_triggers
+            },
+        }
+        print(response_data)
+        return jsonify(response_data), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

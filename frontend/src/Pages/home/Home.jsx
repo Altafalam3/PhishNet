@@ -113,6 +113,8 @@ const App = () => {
       });
     });
 
+    
+
     await axios.post('http://localhost:5000/tickNotTick', { "url": inputUrl })
       .then((response) => {
         console.log('API response:', response.data);
