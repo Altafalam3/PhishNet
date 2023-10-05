@@ -21,18 +21,21 @@ const extractedAnchors = fetchd.extracted_anchors;
   };
  const [ipInfo, setIpInfo] = useState(null);
 
-  useEffect(() => {
-    const fetchIpLocation = async () => {
-      try {
-        const response = await axios.get('https://api.iplocation.net/?ip=192.168.1.1');
-        setIpInfo(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error('Error fetching IP location:', error);
-      }
-    };
+ const fetchIpLocation = async () => {
+   try {
+     const response = await axios.get('https://api.iplocation.net/?ip=192.168.1.1');
+     setIpInfo(response.data);
+     console.log(response.data);
+   } catch (error) {
+     console.error('Error fetching IP location:', error);
+   }
+ };
 
+
+  
+  useEffect(() => {
     fetchIpLocation();
+
   }, []);
 
 
