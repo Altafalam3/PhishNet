@@ -1,18 +1,37 @@
-import React from 'react';
+// import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Result = () => {
   const location = useLocation();
   const { state } = location;
-
-  const scanResults = {
+  const [locationData, setLocationData] = useState(null);
+  const apiKey = 'ec51576d4710b2';
+    const scanResults = {
     sourceURL: 'https://example.com',
     redirectedURL: 'https://redirected-example.com',
     hostingProvider: 'Example Hosting',
     ipAddress: '192.168.1.1',
     firstSeen: '7/8/2023, 3:30:00 pm',
   };
+ const [ipInfo, setIpInfo] = useState(null);
+
+  useEffect(() => {
+    const fetchIpLocation = async () => {
+      try {
+        const response = await axios.get('https://api.iplocation.net/?ip=192.168.1.1');
+        setIpInfo(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching IP location:', error);
+      }
+    };
+
+    fetchIpLocation();
+  }, []);
+
 
   const statusStyle = {
     display: 'flex',
@@ -146,6 +165,19 @@ const Result = () => {
             </tr>
           </tbody>
         </table>
+       <div>
+      <h2>IP Location Example</h2>
+      {ipInfo ? (
+        <div>
+          <p>IP: {ipInfo.ip}</p>
+          <p>Country: {ipInfo.country_name}</p>
+          <p>ISP: {ipInfo.isp}</p>
+          {/* Add more information as needed */}
+        </div>
+      ) : (
+        <p>Loading IP location...</p>
+      )}
+    </div>
       </div>
     </div>
   );

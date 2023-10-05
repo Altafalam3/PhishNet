@@ -8,6 +8,7 @@ const Footer = () => {
             <p>
                 Made with{" "}
                 <BsHeartFill style={{ color: "red", marginBottom: "-2px" }} />{" "}
+                with ReactJS
             </p>
         </footer>
     );
