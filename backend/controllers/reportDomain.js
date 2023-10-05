@@ -3,7 +3,7 @@ import ReportDomain from "../models/ReportDomain.js";
 // Create a new ReportDomain
 export const createReportDomain = async (req, res) => {
    try {
-      console.log(req.body);
+      // console.log(req.body);
       const { domainName, emailId, details, category } = req.body;
       const newReportDomain = new ReportDomain({ domainName, emailId, details, category });
       await newReportDomain.save();

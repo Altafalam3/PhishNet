@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import male from './male.png';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 const App = () => {
   const gradientColors = [
@@ -90,9 +91,11 @@ const App = () => {
     flexDirection: 'column',
     gap: '1rem',
   };
-  const handleScan = () => {
+
+  const handleScan = async () => {
     setScanning(true);
     setScanMessages([]);
+
 
     // Simulate scanning steps with timeouts
     const scanSteps = [
@@ -110,20 +113,32 @@ const App = () => {
       });
     });
 
-    // Navigate to the /results route after scanning is complete
-    Promise.all(scanPromises).then(() => {
-      setTimeout(() => {
-        console.log('inputUrl before navigating:', inputUrl);
-        setScanning(false);
-        navigate('/results', { state: { inputUrl } });
-      }, 1000); // Adjust the delay as needed
-    });
+    await axios.post('http://localhost:5000/tickNotTick', { "url": inputUrl })
+      .then((response) => {
+        console.log('API response:', response.data);
+        // Handle the API response as needed
 
-    // Finish scanning after all steps are completed
-    setTimeout(() => {
-      setScanning(false);
-    }, scanSteps.length * 2000 + 1000); // Adjust the delay as needed
+        // Navigate to the /results route after scanning is complete
+        Promise.all(scanPromises).then(() => {
+          setTimeout(() => {
+            console.log('inputUrl before navigating:', inputUrl);
+            setScanning(false);
+            navigate('/results', { state: { inputUrl } });
+          }, 1000); // Adjust the delay as needed
+        });
+      })
+      .catch((error) => {
+        console.error('Error making API request:', error);
+        // Handle the error as needed
+        setScanning(false); // Set scanning to false in case of an error
+      });
+
+
+    // Make the API request to /api/ticknottick
+    // Assuming you want to send inputUrl as data to the API
   };
+
+  // ...
 
   // Move this part inside the handleScan function or remove it
   // ...

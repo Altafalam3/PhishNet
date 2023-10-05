@@ -10,8 +10,11 @@ import UserSettingsCard from './UserSettingsCard'
 import SecurityRecommendationsCard from './SecurityRecommendationsCard';
 import ScanHistory from './ScanHistory';
 
+import { UserContext } from '../../context/UserContext';
+import { useContext } from 'react';
+
 function Home() {
-  // Assuming 'reports' is an array of report objects
+  const { isLoggedIn, userr, checkUserLoggedIn, handleLogout } = useContext(UserContext);
 
   const reports = [
     { date: '2023-10-01', status: 'Pending', outcome: 'In review' },
@@ -30,12 +33,12 @@ function Home() {
     // Add more leaderboard entries as needed
   ];
 
-  const settings = {
-    name: 'Your Name',
-    email: 'your.email@example.com',
-    isPremium: true,
-    // Add more settings as needed
-  };
+    const settings = {
+      name: userr.name ? userr.name : "Your Name",
+      email: userr.email ? userr.email : "Your Email",
+      isPremium: userr.isPremium ? userr.isPremium : "Premium",
+      // Add more settings as needed
+    };
 
   const data = [
     { date: '2023-03-01', status: 'Processed', outcome: 'Phishing' },
