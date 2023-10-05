@@ -258,10 +258,10 @@ def analyze_url():
         mo = mouseOver(url)
         disright = disablerightClick(url)
         fwd = forwarding(url)
+        extracted_anchors = extract_anchor_tags(url)
         phishing_count_html = sum([redr, mo, disright, fwd])
 
         total_triggers = sum([phishing_count, phishing_count_html, dom])
-        
         result_conclusion = ''
         if total_triggers > 7:
             result_conclusion = "Website may be suspicious"
@@ -284,8 +284,8 @@ def analyze_url():
             "mouse_over_effect": mo,  # Include mouse over effect
             "right_click_disabled": disright,  # Include right-click disabled
             "url_forwarding": fwd,  # Include URL forwarding
-
             "whois_data": domain_info, # who is data alll
+            "extracted_anchors":extracted_anchors, #acnhor tag
             "triggers": {
                 "feature_extraction_triggers": phishing_count,
                 "whois_triggers": dom,
