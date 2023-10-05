@@ -18,7 +18,7 @@ SMTP_USERNAME = 'davidherealways@gmail.com'
 SMTP_PASSWORD = 'qeij eqsh ipov cedn'
 
 # API Configuration
-API_URL = 'https://your-api-endpoint.com'
+API_URL = 'http://localhost:5000/tickNotTick'
 
 # Create a function to send an email
 def send_email(subject, body, recipient_email):
@@ -46,7 +46,7 @@ while True:
                 email_id_list = email_ids[0].split()
                 for email_id in email_id_list:
                     _, message_data = imap.fetch(email_id, '(RFC822)')
-                    print(f"1{message_data}")
+                    # print(f"1{message_data}")
                     raw_email = message_data[0][1]
                     email_message = email.message_from_bytes(raw_email)
                     print(f"2{email_message}")
