@@ -4,114 +4,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const Result = () => {
-
-  const fetchd = {
-    "at_sign": 0,
-    "domain": "google.com",
-    "extracted_anchors": [
-        "https://www.google.com/imghp?hl=en&tab=wi",
-        "https://maps.google.co.in/maps?hl=en&tab=wl",
-        "https://play.google.com/?hl=en&tab=w8",
-        "https://www.youtube.com/?tab=w1",
-        "https://news.google.com/?tab=wn",
-        "https://mail.google.com/mail/?tab=wm",
-        "https://drive.google.com/?tab=wo",
-        "https://www.google.co.in/intl/en/about/products?tab=wh",
-        "http://www.google.co.in/history/optout?hl=en",
-        "https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/&ec=GAZAAQ",
-        "https://www.google.com/setprefs?sig=0_HXZl7qIOTmULCsgT_SMMCeMWSZY%3D&hl=hi&source=homepage&sa=X&ved=0ahUKEwiciYms1t2BAxXYRN4KHS8gC1EQ2ZgBCAU",
-        "https://www.google.com/setprefs?sig=0_HXZl7qIOTmULCsgT_SMMCeMWSZY%3D&hl=bn&source=homepage&sa=X&ved=0ahUKEwiciYms1t2BAxXYRN4KHS8gC1EQ2ZgBCAY",
-        "https://www.google.com/setprefs?sig=0_HXZl7qIOTmULCsgT_SMMCeMWSZY%3D&hl=te&source=homepage&sa=X&ved=0ahUKEwiciYms1t2BAxXYRN4KHS8gC1EQ2ZgBCAc",
-        "https://www.google.com/setprefs?sig=0_HXZl7qIOTmULCsgT_SMMCeMWSZY%3D&hl=mr&source=homepage&sa=X&ved=0ahUKEwiciYms1t2BAxXYRN4KHS8gC1EQ2ZgBCAg",
-        "https://www.google.com/setprefs?sig=0_HXZl7qIOTmULCsgT_SMMCeMWSZY%3D&hl=ta&source=homepage&sa=X&ved=0ahUKEwiciYms1t2BAxXYRN4KHS8gC1EQ2ZgBCAk",
-        "https://www.google.com/setprefs?sig=0_HXZl7qIOTmULCsgT_SMMCeMWSZY%3D&hl=gu&source=homepage&sa=X&ved=0ahUKEwiciYms1t2BAxXYRN4KHS8gC1EQ2ZgBCAo",
-        "https://www.google.com/setprefs?sig=0_HXZl7qIOTmULCsgT_SMMCeMWSZY%3D&hl=kn&source=homepage&sa=X&ved=0ahUKEwiciYms1t2BAxXYRN4KHS8gC1EQ2ZgBCAs",
-        "https://www.google.com/setprefs?sig=0_HXZl7qIOTmULCsgT_SMMCeMWSZY%3D&hl=ml&source=homepage&sa=X&ved=0ahUKEwiciYms1t2BAxXYRN4KHS8gC1EQ2ZgBCAw",
-        "https://www.google.com/setprefs?sig=0_HXZl7qIOTmULCsgT_SMMCeMWSZY%3D&hl=pa&source=homepage&sa=X&ved=0ahUKEwiciYms1t2BAxXYRN4KHS8gC1EQ2ZgBCA0",
-        "http://www.google.co.in/services/",
-        "https://www.google.com/setprefdomain?prefdom=IN&prev=https://www.google.co.in/&sig=K_3BRuPzFB_LrNcXrHUXlrR3atrBE%3D"
-    ],
-    "https_domain": 0,
-    "iframe_redirection": 0,
-    "ip": 0,
-    "message": "Analysis complete",
-    "mouse_over_effect": 0,
-    "redirection": 0,
-    "result_conclusion": "Website may be safe",
-    "right_click_disabled": 1,
-    "tiny_url": 0,
-    "triggers": {
-        "feature_extraction_triggers": 1,
-        "html_js_triggers": 0,
-        "total_triggers": 2,
-        "whois_triggers": 1
-    },
-    "url_depth": 0,
-    "url_forwarding": -1,
-    "url_length": 0,
-    "whois_data": {
-        "address": null,
-        "city": null,
-        "country": "US",
-        "creation_date": [
-            "Mon, 15 Sep 1997 04:00:00 GMT",
-            "Mon, 15 Sep 1997 07:00:00 GMT"
-        ],
-        "dnssec": "unsigned",
-        "domain_name": [
-            "GOOGLE.COM",
-            "google.com"
-        ],
-        "emails": [
-            "abusecomplaints@markmonitor.com",
-            "whoisrequest@markmonitor.com"
-        ],
-        "expiration_date": [
-            "Thu, 14 Sep 2028 04:00:00 GMT",
-            "Wed, 13 Sep 2028 07:00:00 GMT"
-        ],
-        "name": null,
-        "name_servers": [
-            "NS1.GOOGLE.COM",
-            "NS2.GOOGLE.COM",
-            "NS3.GOOGLE.COM",
-            "NS4.GOOGLE.COM",
-            "ns2.google.com",
-            "ns4.google.com",
-            "ns1.google.com",
-            "ns3.google.com"
-        ],
-        "org": "Google LLC",
-        "referral_url": null,
-        "registrant_postal_code": null,
-        "registrar": "MarkMonitor, Inc.",
-        "state": "CA",
-        "status": [
-            "clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited",
-            "clientTransferProhibited https://icann.org/epp#clientTransferProhibited",
-            "clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited",
-            "serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited",
-            "serverTransferProhibited https://icann.org/epp#serverTransferProhibited",
-            "serverUpdateProhibited https://icann.org/epp#serverUpdateProhibited",
-            "clientUpdateProhibited (https://www.icann.org/epp#clientUpdateProhibited)",
-            "clientTransferProhibited (https://www.icann.org/epp#clientTransferProhibited)",
-            "clientDeleteProhibited (https://www.icann.org/epp#clientDeleteProhibited)",
-            "serverUpdateProhibited (https://www.icann.org/epp#serverUpdateProhibited)",
-            "serverTransferProhibited (https://www.icann.org/epp#serverTransferProhibited)",
-            "serverDeleteProhibited (https://www.icann.org/epp#serverDeleteProhibited)"
-        ],
-        "updated_date": [
-            "Mon, 09 Sep 2019 15:39:04 GMT",
-            "Mon, 09 Sep 2019 15:39:04 GMT"
-        ],
-        "whois_server": "whois.markmonitor.com"
-    }
-}
-
-
-const extractedAnchors = fetchd.extracted_anchors;
   const location = useLocation();
   const { state } = location;
+
+  const fetchd = state.fetchdd;
+
+const extractedAnchors = fetchd.extracted_anchors;
   const [locationData, setLocationData] = useState(null);
   const apiKey = 'ec51576d4710b2';
     const scanResults = {
@@ -227,6 +125,10 @@ const extractedAnchors = fetchd.extracted_anchors;
     marginTop: '2rem',
     padding : "4vh 10vw",
   };
+
+  if(!fetchd){
+    return <div>Loading .....</div>
+  }
 
   return (
     <div style={containerStyle}>
