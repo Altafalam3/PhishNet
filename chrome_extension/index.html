@@ -8,59 +8,18 @@
 </head>
 
 <body>
-    <!-- <div class="container mt-3" style="width: 450px;">
-        <h2 class="text-center">Covid Latest Report-UK</h2>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Country</th>
-                <th>Confirmed</th>
-                <th>Deaths</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td id="date"></td>
-                <td id="areaName"></td>
-                <td id="latestBy"></td>
-                <td id="deathNew"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div> -->
-
-    <div class="container mt-3" style="width: 450px">
-        <h2 class="text-center">User Login</h2>
-        <form id="loginForm">
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
+    <div class="current_url">
+        <b>Current URL : </b>
+        <span id="currUrl"></span>
     </div>
-
-    <div class="container mt-3" style="width: 450px">
-        <h2 class="text-center">User Information</h2>
-        <div class="card">
-            <div class="card-body">
-                <p id="namee" class="card-text"></p>
-                <p id="emaill" class="card-text"></p>
-                <p id="phonee" class="card-text"></p>
-                <p id="isAdminn" class="card-text"></p>
-            </div>
-        </div>
+    <br>
+    <div class="f_analysis">
+        <div class="model">Model Analysis: <span id="model_analysis"></span></div>
+        <div class="model">In Depth Analysis: <span id="tick_analysis"></span></div>
     </div>
 
 
-    <div id="loginMessage" class="alert alert-warning" style="display: none">
-        Please login to see this feature.
-    </div>
+
 </body>
 <script src="script.js"></script>
 
