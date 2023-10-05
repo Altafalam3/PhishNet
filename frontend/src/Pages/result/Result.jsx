@@ -9,30 +9,28 @@ const Result = () => {
 
   const fetchd = state.fetchdd;
 
-const extractedAnchors = fetchd.extracted_anchors;
+  const extractedAnchors = fetchd.extracted_anchors;
   const [locationData, setLocationData] = useState(null);
   const apiKey = 'ec51576d4710b2';
-    const scanResults = {
+  const scanResults = {
     sourceURL: 'https://example.com',
     redirectedURL: 'https://redirected-example.com',
     hostingProvider: 'Example Hosting',
     ipAddress: '192.168.1.1',
     firstSeen: '7/8/2023, 3:30:00 pm',
   };
- const [ipInfo, setIpInfo] = useState(null);
+  const [ipInfo, setIpInfo] = useState(null);
 
- const fetchIpLocation = async () => {
-   try {
-     const response = await axios.get('https://api.iplocation.net/?ip=192.168.1.1');
-     setIpInfo(response.data);
-     console.log(response.data);
-   } catch (error) {
-     console.error('Error fetching IP location:', error);
-   }
- };
+  const fetchIpLocation = async () => {
+    try {
+      const response = await axios.get('https://api.iplocation.net/?ip=192.168.1.1');
+      setIpInfo(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching IP location:', error);
+    }
+  };
 
-
-  
   useEffect(() => {
     fetchIpLocation();
 
@@ -67,8 +65,8 @@ const extractedAnchors = fetchd.extracted_anchors;
 
   const scanResultsContainerStyle = {
     marginTop: '2rem',
-    backgroundColor : "#E6F4FF",
-    padding : "4vh  3vw"
+    backgroundColor: "#E6F4FF",
+    padding: "4vh  3vw"
   };
 
   const headingStyle = {
@@ -109,7 +107,7 @@ const extractedAnchors = fetchd.extracted_anchors;
     backgroundColor: '#f2f2f2',
     padding: '1rem',
     borderRadius: '8px',
-    maxWidth : "7vw"
+    maxWidth: "7vw"
   };
   const cardStyle_S = {
     backgroundColor: '#CCF2DC',
@@ -126,10 +124,10 @@ const extractedAnchors = fetchd.extracted_anchors;
     width: '100%',
     borderCollapse: 'collapse',
     marginTop: '2rem',
-    padding : "4vh 10vw",
+    padding: "4vh 10vw",
   };
 
-  if(!fetchd){
+  if (!fetchd) {
     return <div>Loading .....</div>
   }
 
@@ -145,9 +143,9 @@ const extractedAnchors = fetchd.extracted_anchors;
             <tr>
               <td style={labelCellStyle}>Source URL</td>
               <td style={valueCellStyle}>
-              {/* {state.inputUrl} */}
+                {/* {state.inputUrl} */}
                 {fetchd.domain}
-                </td>
+              </td>
             </tr>
             <tr>
               <td style={labelCellStyle}>Redirected URL</td>
@@ -169,72 +167,72 @@ const extractedAnchors = fetchd.extracted_anchors;
         </table>
 
         <div style={cardsContainerStyle}>
-          <div  style={fetchd.https_domain === 0 ? cardStyle_S : cardStyle_F }> 
-           <b>https domain</b>  : {fetchd.https_domain === 0 ? "Not Suspisious" : "Suspisious"}
+          <div style={fetchd.https_domain === 0 ? cardStyle_S : cardStyle_F}>
+            <b>https domain</b>  : {fetchd.https_domain === 0 ? "Not Suspisious" : "Suspisious"}
           </div>
-            <div  style={fetchd.iframe_redirection === 0 ? cardStyle_S : cardStyle_F }>
-              
+          <div style={fetchd.iframe_redirection === 0 ? cardStyle_S : cardStyle_F}>
+
             <b>Iframe Redirection</b> : {fetchd.iframe_redirection === 0 ? "Not Suspisious" : "Suspisious"}
-            </div>
-            <div  style={fetchd.ip === 0 ? cardStyle_S : cardStyle_F }>
-              
+          </div>
+          <div style={fetchd.ip === 0 ? cardStyle_S : cardStyle_F}>
+
             <b>IP Address</b> : {fetchd.ip === 0 ? "Not Suspisious" : "Suspisious"}
-            </div>
-            <div  style={fetchd.right_click_disabled === 0 ? cardStyle_S : cardStyle_F }>
-              
+          </div>
+          <div style={fetchd.right_click_disabled === 0 ? cardStyle_S : cardStyle_F}>
+
             <b>Right Click Disabled</b>: {fetchd.right_click_disabled === 0 ? "Not Suspisious" : "Suspisious"}
-            </div>
-            <div  style={fetchd.tiny_url === 0 ? cardStyle_S : cardStyle_F }>
-              
+          </div>
+          <div style={fetchd.tiny_url === 0 ? cardStyle_S : cardStyle_F}>
+
             <b>Tiny Url</b> : {fetchd.tiny_url === 0 ? "Not Suspisious" : "Suspisious"}
-            </div>
-            <div  style={fetchd.https_domain === 0 ? cardStyle_S : cardStyle_F }>
-              
+          </div>
+          <div style={fetchd.https_domain === 0 ? cardStyle_S : cardStyle_F}>
+
             <b>Https domain</b>  : {fetchd.https_domain === 0 ? "Not Suspisious" : "Suspisious"}
-            </div>
-            <div  style={fetchd.url_depth === 0 ? cardStyle_S : cardStyle_F }>
-              
+          </div>
+          <div style={fetchd.url_depth === 0 ? cardStyle_S : cardStyle_F}>
+
             <b> URL Depth </b>: {fetchd.url_depth === 0 ? "Not Suspisious" : "Suspisious"}
-            </div>
-            <div  style={fetchd.url_forwarding === 0 ? cardStyle_S : cardStyle_F }>
-              
+          </div>
+          <div style={fetchd.url_forwarding === 0 ? cardStyle_S : cardStyle_F}>
+
             <b> Url Forwarding </b>: {fetchd.url_forwarding === 0 ? "Not Suspisious" : "Suspisious"}
-            </div>
-            <div  style={fetchd.url_length === 0 ? cardStyle_S : cardStyle_F }>
-              
+          </div>
+          <div style={fetchd.url_length === 0 ? cardStyle_S : cardStyle_F}>
+
             <b> URL Length </b>: {fetchd.url_length === 0 ? "Not Suspisious" : "Suspisious"}
-            </div>
+          </div>
         </div>
 
         <table style={anotherTableStyle}>
           <h3 style={{ color: 'black' }}>Embedded links</h3>
 
           <tbody style={cardStyle}>
-            <th style={{"maxWidth" : "7vw"}}>
+            <th style={{ "maxWidth": "7vw" }}>
               {/* Embedded Links for redirecting */}
             </th>
 
             {extractedAnchors.map((item, i) => (
-            <tr key={i} style={{"maxWidth" : "7vw"}}>
-              <td style={valueCellStyle}>{item}</td>
-              <td style={valueCellStyle}><button >Analyze</button></td>
-            </tr>
-        ))}
+              <tr key={i} style={{ "maxWidth": "7vw" }}>
+                <td style={valueCellStyle}>{item}</td>
+                <td style={valueCellStyle}><button >Analyze</button></td>
+              </tr>
+            ))}
           </tbody>
         </table>
-       <div>
-      <h2>IP Location Example</h2>
-      {ipInfo ? (
         <div>
-          <p>IP: {ipInfo.ip}</p>
-          <p>Country: {ipInfo.country_name}</p>
-          <p>ISP: {ipInfo.isp}</p>
-          {/* Add more information as needed */}
+          <h2>IP Location Example</h2>
+          {ipInfo ? (
+            <div>
+              <p>IP: {ipInfo.ip}</p>
+              <p>Country: {ipInfo.country_name}</p>
+              <p>ISP: {ipInfo.isp}</p>
+              {/* Add more information as needed */}
+            </div>
+          ) : (
+            <p>Loading IP location...</p>
+          )}
         </div>
-      ) : (
-        <p>Loading IP location...</p>
-      )}
-    </div>
       </div>
     </div>
   );
