@@ -10,12 +10,17 @@
         body {
             width: 400px; /* Change to your desired width */
             height: 300px; /* Change to your desired height */
-            padding: 30px;
-            background-color: #ffffff ;
+            padding: 15px;
+            background-color: #EFF2FA;
         }
         .current_url{
-            background-color: rgb(250, 169, 47);
 
+        }
+        .fetch_details{
+            
+        }
+        .fetch_details div{
+            margin: 2vh 2vw;
         }
     </style>
 </head>
@@ -26,48 +31,49 @@
         <b>Your Current URL : </b>
         <span id="currUrl"></span>
     </div>
+    <hr>
     <br>
     <br>
     <div class="f_analysis">
-        <div class="model">Model Analysis: <span id="model_analysis"></span></div>
+        <div class="model"><b>Model Analysis:</b> <span id="model_analysis"></span></div>
         <br><br>
-        <div class="model">In Depth Analysis: <span id="tick_analysis"></span></div>
-    </div>
-    <div >
+        <div class="model"><b>In Depth Analysis:</b> <span id="tick_analysis"></span></div>
+        </div>
+        <div class="fetch_details" >
         <div > 
-         <b>https domain</b>  : <span id="fetchd.https_domain"></span>
+         https domain  : <span id="fetchd.https_domain"></span>
         </div>
           <div>
             
-          <b>Iframe Redirection</b> : <span id="fetchd.iframe_redirection"></span>
+          Iframe Redirection : <span id="fetchd.iframe_redirection"></span>
           </div>
           <div>
             
-          <b>IP Address</b> : <span id="fetchd.ip"></span>
+          IP Address : <span id="fetchd.ip"></span>
           </div>
           <div >
             
-          <b>Right Click Disabled</b>: <span id="fetchd.right_click_disabled"></span>
+          Right Click Disabled: <span id="fetchd.right_click_disabled"></span>
           </div>
           <div >
             
-          <b>Tiny Url</b> : <span id="fetchd.tiny_url"></span>
+          Tiny Url : <span id="fetchd.tiny_url"></span>
           </div>
           <div >
             
-          <b>Https domain</b>  : <span id="fetchd.https_domain"></span>
+          Https domain  : <span id="fetchd.https_domain"></span>
           </div>
           <div>
             
-          <b> URL Depth </b>: <span id="fetchd.url_depth"></span>
+           URL Depth : <span id="fetchd.url_depth"></span>
           </div>
           <div >
             
-          <b> Url Forwarding </b>: <span id="fetchd.url_forwarding"></span>
+           Url Forwarding : <span id="fetchd.url_forwarding"></span>
           </div>
           <div>
             
-          <b> URL Length </b>: <span id="fetchd.url_length"></span>
+           URL Length : <span id="fetchd.url_length"></span>
           </div>
       </div>
 
