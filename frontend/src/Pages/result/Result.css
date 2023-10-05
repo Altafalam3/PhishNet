@@ -1,0 +1,18 @@
+/* CardStyles.css */
+
+.card-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px; /* Optional: Add padding to space out the cards */
+}
+
+.card {
+    width: 50rem;
+    height: 20rem;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle box shadow */
+    margin: 10px; /* Optional: Add margin to space out the cards */
+}

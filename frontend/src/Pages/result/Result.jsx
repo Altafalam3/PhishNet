@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Result.css'
 
 const Result = () => {
   const location = useLocation();
@@ -133,6 +134,33 @@ const Result = () => {
 
   return (
     <div style={containerStyle}>
+      <div className="card-container">
+      {/* Card 1 */}
+      <div className="card">
+        {/* Card content goes here */}
+          <h1>hi</h1>
+          <h2>bye</h2>
+          <h3>see ya</h3>
+      </div>
+
+      {/* Card 2 */}
+      <div className="card">
+          {/* Card content goes here */}
+           <h1>hi</h1>
+          <h2>bye</h2>
+          <h3>see ya</h3>
+        Card 2
+      </div>
+
+      {/* Card 3 */}
+      <div className="card">
+          {/* Card content goes here */}
+           <h1>hi</h1>
+          <h2>bye</h2>
+          <h3>see ya</h3>
+        Card 3
+      </div>
+    </div>
       <div style={statusStyle}>
         <p style={{ ...urlTextStyle, color: 'black' }}>{state && state.inputUrl}</p>
       </div>
