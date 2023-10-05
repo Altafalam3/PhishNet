@@ -116,6 +116,7 @@ const App = () => {
     await axios.post('http://localhost:5000/tickNotTick', { "url": inputUrl })
       .then((response) => {
         console.log('API response:', response.data);
+        const fetchdd = response.data;
         // Handle the API response as needed
 
         // Navigate to the /results route after scanning is complete
@@ -123,7 +124,7 @@ const App = () => {
           setTimeout(() => {
             console.log('inputUrl before navigating:', inputUrl);
             setScanning(false);
-            navigate('/results', { state: { inputUrl } });
+            navigate('/results', { state: { inputUrl , fetchdd}  });
           }, 1000); // Adjust the delay as needed
         });
       })
