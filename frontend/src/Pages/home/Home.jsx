@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom';
 const App = () => {
   const gradientColors = [
     // 'white',
-        "#67E0DD",
+    "#67E0DD",
     '#A6D8DF',
     '#C5E8E2',
     '#94BBDF',
     '#DBDAE0',
     '#FAE8E1',
   ];
-const [inputUrl, setInputUrl] = useState('');
+  const [inputUrl, setInputUrl] = useState('');
   const navigate = useNavigate();
   const [scanning, setScanning] = useState(false);
   const [scanMessages, setScanMessages] = useState([]);
@@ -74,7 +74,7 @@ const [inputUrl, setInputUrl] = useState('');
 
   const gradientStyle = {
     background: `linear-gradient(to right, ${gradientColors.join(',')})`,
-    backgroundColor:'white',
+    backgroundColor: 'white',
     minHeight: '80vh',
     display: 'flex',
     justifyContent: 'center',
@@ -90,49 +90,44 @@ const [inputUrl, setInputUrl] = useState('');
     flexDirection: 'column',
     gap: '1rem',
   };
-const handleScan = () => {
-  setScanning(true);
-  setScanMessages([]);
+  const handleScan = () => {
+    setScanning(true);
+    setScanMessages([]);
 
-  // Simulate scanning steps with timeouts
-  const scanSteps = [
-    'Scanning the domain name...',
-    'Checking the SSL certificate...',
-    'Analyzing potential threats...',
-  ];
+    // Simulate scanning steps with timeouts
+    const scanSteps = [
+      'Scanning the domain name...',
+      'Checking the SSL certificate...',
+      'Analyzing potential threats...',
+    ];
 
-  const scanPromises = scanSteps.map((step, index) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        setScanMessages((prevMessages) => [...prevMessages, step]);
-        resolve();
-      }, index * 2000);
+    const scanPromises = scanSteps.map((step, index) => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          setScanMessages((prevMessages) => [...prevMessages, step]);
+          resolve();
+        }, index * 2000);
+      });
     });
-  });
 
-  // Navigate to the /results route after scanning is complete
-  Promise.all(scanPromises).then(() => {
+    // Navigate to the /results route after scanning is complete
+    Promise.all(scanPromises).then(() => {
+      setTimeout(() => {
+        console.log('inputUrl before navigating:', inputUrl);
+        setScanning(false);
+        navigate('/results', { state: { inputUrl } });
+      }, 1000); // Adjust the delay as needed
+    });
+
+    // Finish scanning after all steps are completed
     setTimeout(() => {
-      console.log('inputUrl before navigating:', inputUrl);
       setScanning(false);
-       navigate('/results', { state: { inputUrl } });
-    }, 1000); // Adjust the delay as needed
-  });
+    }, scanSteps.length * 2000 + 1000); // Adjust the delay as needed
+  };
 
-  // Finish scanning after all steps are completed
-  setTimeout(() => {
-    setScanning(false);
-  }, scanSteps.length * 2000 + 1000); // Adjust the delay as needed
-};
+  // Move this part inside the handleScan function or remove it
+  // ...
 
-// Move this part inside the handleScan function or remove it
-// ...
-
- 
-
-
-
-    
   return (
     <div style={gradientStyle}>
       <div style={contentStyle}>
@@ -141,13 +136,13 @@ const handleScan = () => {
           <div>PhishNet - Your Shield Against Phishing Threats in Real-Time.</div>
           <div style={inputContainerStyle}>
             <input
-  type="text"
-  placeholder="Type something..."
-  style={inputStyle}
-  value={inputUrl} // Ensure it's bound to the state
-  onChange={(e) => setInputUrl(e.target.value)}
-  disabled={scanning}
-/>
+              type="text"
+              placeholder="Type something..."
+              style={inputStyle}
+              value={inputUrl} // Ensure it's bound to the state
+              onChange={(e) => setInputUrl(e.target.value)}
+              disabled={scanning}
+            />
 
             <button onClick={handleScan} style={scanButtonStyle} disabled={scanning}>
               {scanning ? 'Scanning...' : 'Scan'}
