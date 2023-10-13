@@ -22,15 +22,11 @@ export const UserProvider = ({ children }) => {
             setUserr(response.data.user);
             console.log(response.data.user);
 
-            // storing in localstorage for extension to access
-            // localStorage.setItem("userData", JSON.stringify(response.data.user));
          }
          else {
             setIsLoggedIn(false);
             setUserr({});
 
-            // delete localstorage
-            // localStorage.removeItem("userData");
          }
       } catch (error) {
          console.error('Error checking user login status:', error);
@@ -47,9 +43,6 @@ export const UserProvider = ({ children }) => {
          console.log(response.data);
          setIsLoggedIn(false);
          setUserr({});
-
-         // Remove the user data from localStorage upon logout
-         // localStorage.removeItem("userData");
 
          console.log(userr, "user delted");
 

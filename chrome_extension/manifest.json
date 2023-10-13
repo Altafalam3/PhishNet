@@ -11,7 +11,7 @@
     "object-src": "self"
   },
 
-  "host_permissions": ["https://localhost:5000/"],
+  "host_permissions": ["https://localhost:5000/, *"],
 
   "background": {
     "service_worker": "script.js"

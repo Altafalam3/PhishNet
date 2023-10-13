@@ -22,6 +22,7 @@ export default function Premium() {
         justifyContent: "center",
         alignItems: "center",
     };
+
     const [premiumprice, setPremiumprice] = useState(350);
     const handlepayment = async () => {
         try {
@@ -34,10 +35,10 @@ export default function Premium() {
                 alert('Premium is already there');
                 return;
             }
-            // console.log("Hanlde")
-            const orderUrl = "http://localhost:8800/api/pay/orders";
+
+            const orderApi = "http://localhost:8800/api/pay/orders";
             const { data } = await axios.post(
-                orderUrl,
+                orderApi,
                 { amount: premiumprice },
                 {
                     headers: {
@@ -49,7 +50,6 @@ export default function Premium() {
                     },
                 }
             );
-            console.log("2nd");
             console.log(data);
             initPayment(data.data);
         } catch (error) {
@@ -67,8 +67,8 @@ export default function Premium() {
             order_id: data.id,
             handler: async (response) => {
                 try {
-                    const verifyUrl = "http://localhost:8800/api/pay/verify";
-                    const { data } = await axios.post(verifyUrl, { ...response, userId: userr._id }, {
+                    const verifyApi = "http://localhost:8800/api/pay/verify";
+                    const { data } = await axios.post(verifyApi, { ...response, userId: userr._id }, {
                         headers: {
                             'Access-Control-Allow-Origin': '*',
                             'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE',
@@ -78,14 +78,13 @@ export default function Premium() {
                     console.log(data);
                     if (data.status) {
                         alert("Purchased Premium Succesfully");
-                        //Update in DB
                     }
                 } catch (error) {
                     console.log(error);
                 }
             },
             theme: {
-                color: "#3399cc",
+                color: "#f57e42",
             },
         };
 

@@ -45,8 +45,6 @@ router.post("/verify", async (req, res) => {
 
 		if (razorpay_signature === expectedSign) {
 			// Payment verified successfully
-			// Here, you can update the user's 'isPremium' field to true
-			// const userId = req.body.userId; // Replace this with how you identify the user
 
 			// Find the user by their ID and update the 'isPremium' field
 			const updatedUser = await User.findByIdAndUpdate(userId, { isPremium: true }, { new: true });

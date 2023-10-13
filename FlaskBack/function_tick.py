@@ -13,8 +13,6 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 
-
-
 #address based features 
 # Function to extract the domain from a URL
 def getDomain(url):
