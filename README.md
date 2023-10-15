@@ -35,8 +35,69 @@ With PhishNet by your side, you can confidently surf the web, knowing that your 
 [PhishNet Demo](https://github.com/YourUsername/PhishNet/demo)
 
 
-For running PhishNet, clone or download the zip file .
-For frontend , open the Phisnet folder in your terminal cd to frontend
-Run,
-      npm i
-This command install the dependencies
+## Installation (Clone)
+
+open terminal and type
+
+```
+git clone https://github.com/Altafalam3/PhishNet.git
+```
+
+or you can download zip file directly
+
+```
+https://github.com/Altafalam3/PhishNet.git
+```
+
+## Frontend ( React )
+
+#### Go to frontend folder then install dependency
+
+```
+npm install
+```
+
+#### To start the server
+
+```
+npm start
+```
+
+#### For Production Build
+
+```
+npm run build
+```
+
+## Backend ( Express.js )
+
+#### Go to backend folder then install dependency
+
+```
+npm install
+```
+
+#### To start the server
+
+```
+npm start
+```
+
+
+## Backend ( Flask )
+
+#### Go to FlaskBack folder then install dependency
+
+```
+pip install -r requirements.txt
+```
+
+#### To start the server
+
+```
+python app.py
+```
+
+
+By Team COC <br>
+========Thank You !!!=========
