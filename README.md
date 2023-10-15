@@ -32,9 +32,7 @@ With PhishNet by your side, you can confidently surf the web, knowing that your 
 
 ## Demo
 
-[PhishNet Demo]
-(https://github.com/Altafalam3/PhishNet/assets/102013452/6006ec9b-c3d0-4cbe-b76e-945fe5462b85
-)
+[Phishnet Demo](https://github.com/Altafalam3/PhishNet/assets/102013452/6006ec9b-c3d0-4cbe-b76e-945fe5462b85)
 
 
 
