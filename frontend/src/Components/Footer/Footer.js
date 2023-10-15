@@ -7,8 +7,8 @@ export default function Footer() {
         <footer className="footer">
             <div className="footer_column">
                 <h3 className="footer_prepfusion">
-                    <span className="footer_prep">Prep</span>
-                    <span className="footer_fusion">Fusion</span>
+                    <span className="footer_prep">Phish</span>
+                    <span className="footer_fusion">Net</span>
                 </h3>
                 <p className="footer_para3">
                     Stay Connected with Us on Social Media for the Latest

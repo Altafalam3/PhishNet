@@ -36,7 +36,7 @@ const App = () => {
 
   const scanButtonStyle = {
     width: '120px',
-    height: '100%',
+    height: '62px',
     fontSize: '16px',
     borderRadius: '0 5px 5px 0',
     border: 'none',

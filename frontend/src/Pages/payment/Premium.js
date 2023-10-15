@@ -60,7 +60,7 @@ export default function Premium() {
     const initPayment = (data) => {
         console.log("In init")
         const options = {
-            key: "rzp_test_zkRk5Km3mrtYWp",
+            key: "rzp_test_Uf8e5ZC0BrgIFH",
             amount: data.amount,
             currency: data.currency,
             description: "Test Transaction",
