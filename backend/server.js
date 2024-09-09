@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import mongoose from "mongoose"
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import rateLimit from "express-rate-limit";
 
 import authRoute from "./routes/auth.js"
 import usersRoute from "./routes/users.js"
@@ -38,7 +39,17 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-
+// Rate limiter middleware (100 requests per 15 minutes per IP)
+const limiter = rateLimit({
+   windowMs: 10 * 60 * 1000, // 15 minutes
+   max: 100, // Limit each IP to 100 requests per `window` (15 minutes)
+   message: "Too many requests from this IP, please try again after 15 minutes",
+   headers: true,
+ });
+ 
+ // Apply the rate limiter to all requests
+ app.use(limiter);
+ 
 const connect = async () => {
    try {
       await mongoose.connect(process.env.MONGO_URL, {
