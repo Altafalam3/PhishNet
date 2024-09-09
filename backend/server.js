@@ -3,7 +3,9 @@ import dotenv from "dotenv"
 import mongoose from "mongoose"
 import cookieParser from "cookie-parser";
 import cors from "cors";
+
 import rateLimit from "express-rate-limit";
+import { createClient } from "redis";
 
 import authRoute from "./routes/auth.js"
 import usersRoute from "./routes/users.js"
@@ -16,12 +18,24 @@ import reportDomain from "./routes/reportDomain.js";
 const app = express()
 dotenv.config()
 
-// const corsOptions = {
-//    origin: 'http://localhost:3000',
-//    credentials: true,
-// };
+// Redis client setup
+const redisClient = createClient();
+redisClient.connect().catch(console.error);
 
-const allowedOrigins = ["http://localhost:5500", "http://localhost:3000", "chrome-extension://eafifecgdjhbdnmpodidiiodfdhgofnh"];
+redisClient.on('connect', () => {
+  console.log('Connected to Redis');
+});
+
+redisClient.on('error', (err) => {
+  console.error(`Redis error: ${err}`);
+});
+
+// Allowed origins for CORS
+const allowedOrigins = [
+  "http://localhost:5500",
+  "http://localhost:3000",
+  "chrome-extension://eafifecgdjhbdnmpodidiiodfdhgofnh",
+];
 
 // Configure CORS to allow requests from the specified origins
 const corsOptions = {
@@ -41,7 +55,7 @@ app.use(cors(corsOptions));
 
 // Rate limiter middleware (100 requests per 15 minutes per IP)
 const limiter = rateLimit({
-   windowMs: 10 * 60 * 1000, // 15 minutes
+   windowMs: 2 * 60 * 1000, // 15 minutes
    max: 100, // Limit each IP to 100 requests per `window` (15 minutes)
    message: "Too many requests from this IP, please try again after 15 minutes",
    headers: true,
