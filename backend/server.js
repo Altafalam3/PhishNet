@@ -6,7 +6,6 @@ import cors from "cors";
 
 import authRoute from "./routes/auth.js"
 import usersRoute from "./routes/users.js"
-import lawyerRoute from "./routes/Lawyer.js"
 
 import contactRoute from "./routes/contact.js"
 import paymentRoutes from "./routes/payment.js";
@@ -73,7 +72,6 @@ app.use(cookieParser());
 // routes
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
-app.use("/api/lawyer", lawyerRoute);
 app.use("/api/pay", paymentRoutes)
 app.use("/api/domainpage", domainPage)
 app.use("/api/reportdomain", reportDomain)

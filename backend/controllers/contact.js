@@ -13,7 +13,6 @@ export const createcontact = async(req,res,next)=>{
 }
 
 
-
 export const getcontact = async (req, res, next) => {
     try {
         const a = await contact.find()

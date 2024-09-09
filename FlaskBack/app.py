@@ -800,7 +800,8 @@ def analyze_url():
             "result": result,
             "caution": caution,
             "prediction_score": (100-prediction_score),
-            "model_probability_score": (random.uniform(80, 88)),
+            # "model_probability_score": (random.uniform(80, 88)),
+            "model_probability_score": (100 - model_probability_score),
             "combined_score": (100-combined_score)
         }
 
