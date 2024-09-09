@@ -4,7 +4,7 @@ import mongoose from "mongoose"
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
-import rateLimit from "express-rate-limit";
+import { rateLimiter } from './middleware/rateLimiter.js'; // Import the rate limiter middleware
 import { createClient } from "redis";
 
 import authRoute from "./routes/auth.js"
@@ -19,7 +19,7 @@ const app = express()
 dotenv.config()
 
 // Redis client setup
-const redisClient = createClient();
+export const redisClient = createClient();
 redisClient.connect().catch(console.error);
 
 redisClient.on('connect', () => {
@@ -53,16 +53,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Rate limiter middleware (100 requests per 15 minutes per IP)
-const limiter = rateLimit({
-   windowMs: 2 * 60 * 1000, // 15 minutes
-   max: 100, // Limit each IP to 100 requests per `window` (15 minutes)
-   message: "Too many requests from this IP, please try again after 15 minutes",
-   headers: true,
- });
- 
- // Apply the rate limiter to all requests
- app.use(limiter);
+// Apply the rate limiter to all requests
+app.use(rateLimiter);
  
 const connect = async () => {
    try {
