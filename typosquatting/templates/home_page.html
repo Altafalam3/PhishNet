@@ -1,0 +1,151 @@
+<!-- 
+    Original author: Marcin Ulikowski
+    Author: David Cruciani
+    Copy-from: https://github.com/elceef/dnstwist
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Typosquatting-finder</title>
+        <link rel="icon" href="{{ url_for('static',filename='image/logo.svg') }}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+        <link rel= "stylesheet" href= "{{ url_for('static',filename='font-awesome/css/font-awesome.min.css') }}"> 
+    </head>
+
+    <body>
+        <div id="container">
+            <div id="top"></div>
+            <div>
+                <header>
+                    <h1><img id="logo" src="{{ url_for('static',filename='image/logo.svg') }}"></h1>
+                    <!-- <p>typosquatting-finder.circl.lu</p> -->
+                </header>
+                <div id="intro"></div>
+                <!-- <div id="intro2">  Phishe.</div> -->
+                <div id="searchbox">
+                    <input type="hidden" id="sid">
+                    <input type="hidden" id="share" value="{{share}}">
+                    <input type="text" id="url" placeholder="Enter a domain name to brute force Typosquatting" autofocus>
+                    <button id="scan">Search</button>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped active" id="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
+                    </div>
+                </div> 
+                <span id="status"></span>
+            </div>
+            <br/>
+            <div>
+                <div class="dropdown" style="float:right;" id="dropdownDownload"></div>
+                <button type="button" id="share_button" class="btn btn-primary" style="display: none;", onclick="share_button()">Share</button>
+                <p>
+                    <a class="btn btn-primary" data-toggle="collapse" href="#collapseOption" role="button" aria-expanded="false" aria-controls="collapseOption">
+                      Advanced
+                    </a>
+                </p>
+            </div>
+            <div class="alert alert-light" id="alert-clip" role="alert">Copied !</div>
+            <div class="collapse " id="collapseOption">
+                <div class="card card-body">
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="checkbox" id="runAll" onclick="runAll()" value="runAll">
+                                <label for="runAll" title="Used to run all algorithms that can be run">Run all algorithm</label>
+                            </td>
+                            <td>
+                                <input type="checkbox" id={{keys[0]}} value={{keys[0]}}>
+                                <label for={{keys[0]}} title="{{algo_list[keys[0]][1]}}">{{ algo_list[keys[0]][0] }}</label>
+                            </td>
+                            <td>
+                                <input type="checkbox" id={{keys[1]}} value={{keys[1]}}>
+                                <label for={{keys[1]}} title="{{algo_list[keys[1]][1]}}">{{ algo_list[keys[1]][0] }}</label>
+                            </td>
+                        </tr>
+                        {% for i in range(2, len_table, 2)%}
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="checkbox" id={{keys[i]}} value={{keys[i]}}>
+                                <label for={{keys[i]}} title="{{algo_list[keys[i]][1]}}">{{algo_list[keys[i]][0]}}</label>
+                            </td>
+
+                            {% if i + 1 < len_table %}
+                                <td>
+                                    <input type="checkbox" id={{keys[i+1]}} value={{keys[i+1]}}>
+                                    <label for={{keys[i+1]}} title="{{algo_list[keys[i+1]][1]}}">{{algo_list[keys[i+1]][0]}}</label>
+                                </td>
+                            {% else %}
+                                <td></td>
+                            {%endif%}
+                        </tr>
+                        {%endfor%}
+                        <tr>
+                            <td>
+                                <input type="checkbox" id="catchAll" value="catchAll">
+                                <label for="catchAll" title="Catch all">Catch All</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br />
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><div id="intro2">Enter list of NS and/or list of MX seperated by comma. Domains will be marked (as known) in case of a match.</div></td>
+                            <td class="col-sm-5">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">NS</span>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" id="ns_input" class="form-control" placeholder="ns1.example.com" aria-label="ns" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="col-sm-5">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">MX</span>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" id="mx_input" class="form-control" placeholder="mail.example.com" aria-label="mx" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td>
+                                <br />
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span id="source">[<a href="info" target="_blank">more info</a>]</span></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <table id="data"></table>
+            <span id="goTop">[<a href="#top">Go Back Top</a>]</span>
+            <!-- <div class="corner-ribbon bottom-left sticky white shadow">
+                <a href="about" target="_blank">About</a>
+            </div> -->
+        </div>
+    </body>
+
+	<script src="{{ url_for('static',filename='js/core.js') }}"></script>
+</html>

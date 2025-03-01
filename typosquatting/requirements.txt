@@ -1,0 +1,13 @@
+requests
+flask
+flask-restx
+werkzeug
+ail-typo-squatting
+idna
+redis
+tldextract
+pymisp
+beautifulsoup4
+nltk
+scikit-learn
+similarius
