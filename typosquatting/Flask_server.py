@@ -767,46 +767,57 @@ def about_page():
 @app.route("/typo", methods=['POST'])
 def typo():
     """Run the scan"""
-    data_dict = request.json["data_dict"]
-    url = data_dict["url"]
+    try:
+        data_dict = request.json["data_dict"]
+        print("----------------------------------------")
+        print(data_dict)
+        print("----------------------------------------")
 
-    domain_extract = tldextract.extract(url)
+        url = data_dict["url"]
+        print(url)
 
-    res = ail_typo_squatting.check_valid_domain(domain_extract)
-    if res:
-        return jsonify({'message': res}), 400
-        
-    if domain_extract.suffix:
-        url = '.'.join(part for part in domain_extract if part)
+        domain_extract = tldextract.extract(url)
 
-    set_info(url, request)
+        res = ail_typo_squatting.check_valid_domain(domain_extract)
+        if res:
+            return jsonify({'message': res}), 400
+            
+        if domain_extract.suffix:
+            url = '.'.join(part for part in [domain_extract.subdomain, 
+                                       domain_extract.domain, 
+                                       domain_extract.suffix] 
+                      if part)
+            
+        set_info(url, request)
 
-    md5Url = hashlib.md5(url.encode()).hexdigest()
+        md5Url = hashlib.md5(url.encode()).hexdigest()
 
-    session = Session(url)
-    session.list_ns = list()
-    session.list_mx = list()
+        session = Session(url)
+        session.list_ns = list()
+        session.list_mx = list()
 
-    if "catchAll" in data_dict:
-        session.catch_all = True
+        if "catchAll" in data_dict:
+            session.catch_all = True
 
-    if 'NS' in data_dict:
-        if data_dict['NS'].rstrip():
-            session.list_ns = valid_ns_mx(data_dict['NS'])
+        if 'NS' in data_dict:
+            if data_dict['NS'].rstrip():
+                session.list_ns = valid_ns_mx(data_dict['NS'])
 
-    if 'MX' in data_dict:
-        if data_dict['MX'].rstrip():
-            session.list_mx = valid_ns_mx(data_dict['MX'])
+        if 'MX' in data_dict:
+            if data_dict['MX'].rstrip():
+                session.list_mx = valid_ns_mx(data_dict['MX'])
 
-    if red.exists(md5Url):
-        session.result_stopped = get_algo_from_redis(data_dict, md5Url)
+        if red.exists(md5Url):
+            session.result_stopped = get_algo_from_redis(data_dict, md5Url)
 
-    session.callVariations(data_dict)
-    session.scan()
-    sessions.append(session)
-
-    return jsonify(session.status()), 201
-    
+        session.callVariations(data_dict)
+        session.scan()
+        sessions.append(session)
+        print(session.status())
+        return jsonify(session.status()), 201
+    except Exception as e:
+        print(f"Error processing typosquatting request: {str(e)}")
+        return jsonify(e), 400
 
 @app.route("/stop/<sid>", methods=['POST', 'GET'])
 def stop(sid):

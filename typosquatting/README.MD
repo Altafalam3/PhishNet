@@ -13,6 +13,7 @@
 - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
 - [nltk](https://github.com/nltk/nltk)
 - [scikit-learn](https://github.com/scikit-learn/scikit-learn)
+- Redis [Instructions Doc Link] (https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/install-redis-on-windows/)
 
 ## How to run
 
