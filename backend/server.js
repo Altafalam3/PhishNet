@@ -4,8 +4,8 @@ import mongoose from "mongoose"
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
-import { rateLimiter } from './middleware/rateLimiter.js'; // Import the rate limiter middleware
-import { createClient } from "redis";
+// import { rateLimiter } from './middleware/rateLimiter.js'; // Import the rate limiter middleware
+// import { createClient } from "redis";
 
 import authRoute from "./routes/auth.js"
 import usersRoute from "./routes/users.js"
@@ -18,17 +18,17 @@ import reportDomain from "./routes/reportDomain.js";
 const app = express()
 dotenv.config()
 
-// Redis client setup
-export const redisClient = createClient();
-redisClient.connect().catch(console.error);
+// // Redis client setup
+// export const redisClient = createClient();
+// redisClient.connect().catch(console.error);
 
-redisClient.on('connect', () => {
-  console.log('Connected to Redis');
-});
+// redisClient.on('connect', () => {
+//   console.log('Connected to Redis');
+// });
 
-redisClient.on('error', (err) => {
-  console.error(`Redis error: ${err}`);
-});
+// redisClient.on('error', (err) => {
+//   console.error(`Redis error: ${err}`);
+// });
 
 // Allowed origins for CORS
 const allowedOrigins = [
@@ -54,7 +54,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Apply the rate limiter to all requests
-app.use(rateLimiter);
+// app.use(rateLimiter);
  
 const connect = async () => {
    try {

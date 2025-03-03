@@ -156,7 +156,10 @@ const Result = () => {
           <h2>Combined Score : </h2>
           {
             modelOutput.combined_score &&
-            <h1>{modelOutput.combined_score.toFixed(2)}</h1>
+            <>
+              <h1>{modelOutput.combined_score.toFixed(2)}</h1> <br />
+              <h3>{modelOutput.result}</h3>
+            </>
           }
         </div>
 
@@ -179,7 +182,7 @@ const Result = () => {
         </div>
       </div>
       <div style={statusStyle}>
-        <p style={{ ...urlTextStyle, color: 'black' }}>{state && state.inputUrl}</p>
+        <p style={{ ...urlTextStyle, color: 'black' }}>URL : {state && state.inputUrl}</p>
       </div>
       <div style={scanResultsContainerStyle}>
         <h2 style={{ ...headingStyle, color: '#333' }}> <b>Scan Results</b> </h2>

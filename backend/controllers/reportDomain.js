@@ -1,9 +1,9 @@
 import ReportDomain from "../models/ReportDomain.js";
 
-import { redisClient } from "../server.js"; // Import Redis client from server.js
+// import { redisClient } from "../server.js"; // Import Redis client from server.js
 
 // Key for caching all report domains
-const REPORT_DOMAIN_CACHE_KEY = 'reportDomains';
+// const REPORT_DOMAIN_CACHE_KEY = 'reportDomains';
 
 // Create a new ReportDomain
 export const createReportDomain = async (req, res) => {
@@ -13,7 +13,7 @@ export const createReportDomain = async (req, res) => {
       await newReportDomain.save();
 
       // Invalidate the cache after creating a new report domain
-      await redisClient.del(REPORT_DOMAIN_CACHE_KEY);
+      // await redisClient.del(REPORT_DOMAIN_CACHE_KEY);
 
       return res.status(201).json(newReportDomain);
    } catch (error) {
@@ -25,19 +25,19 @@ export const createReportDomain = async (req, res) => {
 export const getAllReportDomains = async (req, res) => {
    try {
       // Check if data is available in the cache
-      const cachedData = await redisClient.get(REPORT_DOMAIN_CACHE_KEY);
+      // const cachedData = await redisClient.get(REPORT_DOMAIN_CACHE_KEY);
 
-      if (cachedData) {
-         // If cache exists, return it
-         return res.status(200).json(JSON.parse(cachedData));
-      }
+      // if (cachedData) {
+      //    // If cache exists, return it
+      //    return res.status(200).json(JSON.parse(cachedData));
+      // }
 
       // If cache does not exist, query the database
       const reportDomains = await ReportDomain.find();
 
       // Cache the result with an expiry of 60 minutes (3600 seconds)
       // redisClient.setEx(REPORT_DOMAIN_CACHE_KEY, 60*60, JSON.stringify(reportDomains));
-      redisClient.set(REPORT_DOMAIN_CACHE_KEY, JSON.stringify(reportDomains));
+      // redisClient.set(REPORT_DOMAIN_CACHE_KEY, JSON.stringify(reportDomains));
 
       // Return the response
       return res.status(200).json(reportDomains);
@@ -78,7 +78,7 @@ export const updateReportDomain = async (req, res) => {
       }
 
       // Invalidate the cache after updating the report domain
-      await redisClient.del(REPORT_DOMAIN_CACHE_KEY);
+      // await redisClient.del(REPORT_DOMAIN_CACHE_KEY);
 
       return res.status(200).json(updatedReportDomain);
    } catch (error) {
@@ -86,7 +86,7 @@ export const updateReportDomain = async (req, res) => {
    }
 };
 
-]// Delete a ReportDomain by ID
+// Delete a ReportDomain by ID
 export const deleteReportDomain = async (req, res) => {
    try {
       const { id } = req.params;
@@ -97,7 +97,7 @@ export const deleteReportDomain = async (req, res) => {
       }
 
       // Invalidate the cache after deleting a report domain
-      await redisClient.del(REPORT_DOMAIN_CACHE_KEY);
+      // await redisClient.del(REPORT_DOMAIN_CACHE_KEY);
 
       return res.status(200).json({ message: "ReportDomain deleted successfully" });
    } catch (error) {
